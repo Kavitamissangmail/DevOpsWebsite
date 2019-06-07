@@ -13,7 +13,8 @@ git clone https://github.com/Kavitamissangmail/DevOpsWebsite.git
 Requirements
 ------------
 - JDK 1.8
-- Apache Maven 3.0.3
+- apache-tomcat-8.5.5-windows-x64
+- apache-maven-3.5.4-bin
 - Angular 7
 
 
