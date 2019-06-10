@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+</style>
+<title>Risk Assessment</title>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-resource.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/general.controller.js"></script>
+<script type="text/javascript" src="app/account.service.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="crudApp" ng-controller="GeneralController">
+
+
+
+	<div class="panel panel-default">
+		<!-- <div class="panel-heading">
+			<img src="assets/images/Soprasteria.png">
+		</div> -->
+		<div class="panel-heading">Accounts</div>
+		<div class="panel-body">
+			<form class="col-md-7" ng-submit="saveAccount()">
+
+
+				<table>
+					<tr>
+						<th colspan="4"><center>
+								<b>Account Information</b>
+							</center></th>
+					</tr>
+					<tr>
+						<td>Account Name</td>
+						<td><input type="text" ng-model="account.name"
+							class="form-control" id="accountName" placeholder="AccountName"></td>
+						<td>Team size</td>
+						<td><input type="number" ng-model="account.teamsize"
+							class="form-control" id="teamSize" placeholder="Team Size"></td>
+
+					</tr>
+
+					<tr>
+
+						<td>Customer Location</td>
+						<td><input type="text" ng-model="account.customerlocation"
+							class="form-control" id="customerLocation"
+							placeholder="CustomerLocation"></td>
+
+						<td>Contract Type</td>
+						<td><input type="text" ng-model="account.contracttype"
+							class="form-control" id="contractType"
+							placeholder="Contract Type"></td>
+					</tr>
+					<tr>
+						<td>Delivery Manager</td>
+						<td><input type="text" ng-model="account.deliverymanager"
+							class="form-control" id="deliveryManager"
+							placeholder="DeliveryManager"></td>
+
+						<td>Technology</td>
+						<td><input type="text" ng-model="account.technology"
+							class="form-control" id="technology" placeholder="Technology"></td>
+
+					</tr>
+
+
+
+
+
+					<tr>
+						<td>Delivery Location</td>
+						<td><input type="text" ng-model="account.deliverylocation"
+							class="form-control" id="deliveryLocation"
+							placeholder="Delivery Location"></td>
+
+
+						<td>Account Start Date</td>
+						<td><input type="date" ng-model="account.startDate"
+							class="form-control" id="startDate"
+							placeholder="Account Start Date"></td>
+					</tr>
+
+					<tr>
+						<th colspan="4"><center>
+								<b>Account Scope</b>
+							</center></th>
+					</tr>
+
+					<tr>
+						<td colspan="2">Do you provide 1LS/2LS service support to
+							your customer?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.l1L2ServiceSupport" class="form-control"
+							id="l1L2ServiceSupport">
+								<option value="Yes">Yes</option>
+								<option value="NO">No</option>
+						</select>
+					</tr>
+
+					<tr>
+						<td colspan="2">Do you provide 3LS/DEV service support to
+							your customer?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.devL3ServiceSupport" class="form-control"
+							id="devL3ServiceSupport">
+								<option value="Yes">Yes</option>
+								<option value="NO">No</option>
+						</select>
+					</tr>
+
+					<tr>
+						<td colspan="2">Which project Management methodlogy do you
+							use?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.projectMgmtMethod" class="form-control"
+							id="projectMgmtMethod">
+								<option value="Agile">Agile</option>
+								<option value="Waterfall">Waterfall</option>
+								<option value="Other">Other</option>
+						</select>
+					</tr>
+
+					<tr>
+						<td colspan="2">what is architecture of your applications?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.appArchitecture" class="form-control"
+							id="appArchitecture">
+								<option value="Monolithic">Monolithic</option>
+								<option value="Microservice">Microservice</option>
+						</select>
+					</tr>
+
+					<tr>
+						<td colspan="2">Are your applications on cloud?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.cloudApplication" class="form-control"
+							id="cloudApplication">
+								<option value="yes">Yes</option>
+								<option value="NO">No</option>
+						</select>
+					</tr>
+					<tr>
+						<td colspan="2">Do you have Separate Devlopment and
+							Opeartions teams?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.sepDevOPTeams" class="form-control"
+							id="sepDevOPTeams">
+								<option value="yes">Yes</option>
+								<option value="NO">No</option>
+						</select>
+					</tr>
+
+					<tr>
+						<td colspan="2">Do you have only ops related small frequent
+							changes or project changes as well ?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.smallFrequentorProjectChanges"
+							class="form-control" id="smallFrequentorProjectChanges">
+								<option value="yes">Yes</option>
+								<option value="NO">No</option>
+						</select>
+					</tr>
+
+					<tr>
+						<td colspan="2">Do you have any compliance or regulatory
+							restrictions e.g. DPA,SARBOX etc.?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.complianceregulatoryRestrictions"
+							class="form-control" id="complianceregulatoryRestrictions">
+								<option value="yes">Yes</option>
+								<option value="NO">No</option>
+						</select>
+					</tr>
+
+					<tr>
+						<td colspan="2">Are you responsible for E2E SDLC or only part
+							of it for projects/enhancements?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.e2eSDLCProjectEnhancements"
+							class="form-control" id="e2eSDLCProjectEnhancements">
+								<option value="E2E">E2E</option>
+								<option value="Partially">Partially</option>
+						</select>
+					</tr>
+					<tr>
+						<td colspan="2">Is DEVOPS you internal or customer or both
+							focus area?</td>
+						<td colspan="2"><select type="text"
+							ng-model="account.internalCustomerBoth" class="form-control"
+							id="internalCustomerBoth">
+								<option value="Internal">Internal</option>
+								<option value="Customer">Customer</option>
+								<option value="Both">Both</option>
+						</select>
+					</tr>
+
+					<tr>
+						<td colspan="2"><button type="submit" class="btn btn-default"
+								style="width: 500px; height: 30px;">{{buttonText}}</button></td>
+						<td colspan="2"><button type="reset" class="btn btn-default"
+								style="width: 460px; height: 30px;" ng-click="clearText()"
+								ng-disabled="isDisabled">Reset</button></td>
+					</tr>
+				</table>
+
+			</form>
+
+
+		</div>
+	</div>
+
+	<div class="table-responsive col-md-20">
+		<table class="table table-striped">
+			<tr>
+				<th>ID</th>
+				<th>AccountName</th>
+				<th>Customer Location</th>
+				<th>Delivery Manager</th>
+				<th>Team Size</th>
+				<th>Contract Type</th>
+				<th>Technology</th>
+				<th>Account Start Date</th>
+				<th>l1L2ServiceSupport</th>
+				<th>devL3ServiceSupport</th>
+				<th>projectMgmtMethod</th>
+				<th>appArchitecture</th>
+				<th>cloudApplication</th>
+				<th>sepDevOPTeams</th>
+				<th>smallFrequentorProjectChanges</th>
+				<th>complianceregulatoryRestrictions</th>
+				<th>e2eSDLCProjectEnhancements</th>
+				<th>internalCustomerBoth</th>
+				<th>Update/Delete</th>
+
+			</tr>
+			<tr ng-repeat="account in accounts">
+				<td>{{account.id}}</td>
+				<td>{{account.name}}</td>
+				<td>{{account.customerlocation}}</td>
+				<td>{{account.deliverymanager}}</td>
+				<td>{{account.teamsize}}</td>
+				<td>{{account.contracttype}}</td>
+				<td>{{account.technology}}</td>
+				<td>{{account.startDate}}</td>
+				<td>{{account.l1L2ServiceSupport}}</td>
+				<td>{{account.devL3ServiceSupport}}</td>
+				<td>{{account.projectMgmtMethod}}</td>
+				<td>{{account.appArchitecture}}</td>
+				<td>{{account.cloudApplication}}</td>
+				<td>{{account.sepDevOPTeams}}</td>
+				<td>{{account.smallFrequentorProjectChanges}}</td>
+				<td>{{account.complianceregulatoryRestrictions}}</td>
+				<td>{{account.e2eSDLCProjectEnhancements}}</td>
+				<td>{{account.internalCustomerBoth}}</td>
+
+				<td>
+					<button type="button" class="btn btn-default"
+						ng-click="updateAccountInit(account)">
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+					</button>
+					<button type="button" class="btn btn-default"
+						ng-click="deleteAccount(account)">
+						<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>
