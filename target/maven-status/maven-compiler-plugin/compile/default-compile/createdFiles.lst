@@ -1,9 +1,0 @@
-com\soprasteria\devopsassesmenttool\controller\AccountResource.class
-com\soprasteria\devopsassesmenttool\model\Account.class
-com\soprasteria\devopsassesmenttool\repository\AccountRepository.class
-com\soprasteria\devopsassesmenttool\repository\MeasureRepository.class
-com\soprasteria\devopsassesmenttool\controller\MeasureResource.class
-com\soprasteria\devopsassesmenttool\CrudApp.class
-com\soprasteria\devopsassesmenttool\sevice\MeasureService.class
-com\soprasteria\devopsassesmenttool\sevice\AccountService.class
-com\soprasteria\devopsassesmenttool\model\Measure.class
