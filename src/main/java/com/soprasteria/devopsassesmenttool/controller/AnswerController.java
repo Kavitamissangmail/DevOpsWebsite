@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.devopsassesmenttool.model.Answer;
-import com.soprasteria.devopsassesmenttool.model.Question;
 import com.soprasteria.devopsassesmenttool.sevice.AnswerService;
 import com.soprasteria.devopsassesmenttool.sevice.UserService;
 
@@ -42,7 +41,7 @@ public class AnswerController {
 	}
 
 	@RequestMapping(value = "user/{userId}/answer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Answer createAnswer(@PathVariable(value = "userId") Integer userId, @RequestBody Answer answer) {
+	public Answer createAnswer(@PathVariable(value = "userId") Long userId, @RequestBody Answer answer) {
 		return answerService.createAnswer(userId, answer);
 	}
 

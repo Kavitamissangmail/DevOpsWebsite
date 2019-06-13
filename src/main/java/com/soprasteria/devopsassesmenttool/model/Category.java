@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -62,8 +61,6 @@ public class Category implements Serializable {
 	public String getCategoryName() {
 		return categoryName;
 	}
-
-
 
 	/**
 	 * @return the cId

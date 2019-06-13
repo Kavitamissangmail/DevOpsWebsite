@@ -12,8 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.soprasteria.devopsassesmenttool.model.Answer;
-import com.soprasteria.devopsassesmenttool.model.Question;
-import com.soprasteria.devopsassesmenttool.model.User;
+import com.soprasteria.devopsassesmenttool.model.AppUser;
 import com.soprasteria.devopsassesmenttool.repository.AnswerRepository;
 import com.soprasteria.devopsassesmenttool.repository.UserRepository;
 import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
@@ -48,16 +47,16 @@ public class AnswerService {
 		return answerRepository.getAnswersByUserUserId(answerId);
 	}
 
-	public Answer createAnswer(Integer userId, Answer answer) {
+	public Answer createAnswer(Long userId, Answer answer) {
 		Set<Answer> answers = new HashSet<Answer>();
 
-		User user = userRepository.findByUserId(userId);
-		if (user == null) {
+		AppUser appUser = userRepository.findByUserId(userId);
+		if (appUser == null) {
 			throw new ResourceNotFoundException("User with id " + userId + " does not exist");
 		}
 
 		// tie Category to Question
-		answer.setUser(user);
+		answer.setUser(appUser);
 
 		Answer answer2 = answerRepository.save(answer);
 		// tie Question to Category

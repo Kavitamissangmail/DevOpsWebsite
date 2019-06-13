@@ -5,7 +5,6 @@ package com.soprasteria.devopsassesmenttool.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,7 +33,7 @@ public class Rating implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	private Integer rid;
 
 	private Integer ratingValue;
@@ -42,14 +41,11 @@ public class Rating implements Serializable {
 	private String ratinglabel;
 
 	private String ratingDesc;
-    
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "questionId", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Question question;
-
-
 
 	/**
 	 * @return the rid
@@ -65,12 +61,9 @@ public class Rating implements Serializable {
 		this.rid = rid;
 	}
 
-
-
 	/**
 	 * @return the ratingValue
 	 */
-
 
 	/**
 	 * @return the ratingDesc
@@ -78,8 +71,6 @@ public class Rating implements Serializable {
 	public String getRatingDesc() {
 		return ratingDesc;
 	}
-
-
 
 	/**
 	 * @return the ratingValue
@@ -110,8 +101,7 @@ public class Rating implements Serializable {
 	}
 
 	/**
-	 * @param ratingDesc
-	 *            the ratingDesc to set
+	 * @param ratingDesc the ratingDesc to set
 	 */
 	public void setRatingDesc(String ratingDesc) {
 		this.ratingDesc = ratingDesc;
@@ -133,8 +123,7 @@ public class Rating implements Serializable {
 	}
 
 	/**
-	 * @param question
-	 *            the question to set
+	 * @param question the question to set
 	 */
 	public void setQuestion(Question question) {
 		this.question = question;
