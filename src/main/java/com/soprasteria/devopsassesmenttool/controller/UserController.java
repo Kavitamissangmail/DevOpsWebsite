@@ -4,7 +4,6 @@
 package com.soprasteria.devopsassesmenttool.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -18,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.devopsassesmenttool.model.User;
-import com.soprasteria.devopsassesmenttool.sevice.AnswerService;
-
+import com.soprasteria.devopsassesmenttool.repository.LoginDto;
 import com.soprasteria.devopsassesmenttool.sevice.UserService;
+import com.soprasteria.devopsassesmenttool.util.ApiResponse;
 
 /**
  * @author dbkumar
@@ -54,5 +53,24 @@ public class UserController {
 	public ResponseEntity<Object> deleteUserByUserId(@PathVariable(value = "userId") Integer userId) {
 		return userService.deleteByUserId(userId);
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ApiResponse login(@RequestBody LoginDto loginDto){
+        return userService.login(loginDto);
+    }
+	
+
+	@RequestMapping(value = "/logout/{userName}", method = RequestMethod.GET)
+    public ApiResponse login(@PathVariable(value = "userName") String userName){
+		
+		return userService.logout(userName);
+  
+    }
+	@RequestMapping(value = "/token/{userName}", method = RequestMethod.GET)
+    public String createToken(@PathVariable(value = "userName") String userName){
+		
+		return userService.createToken(userName);
+  
+    }
 
 }

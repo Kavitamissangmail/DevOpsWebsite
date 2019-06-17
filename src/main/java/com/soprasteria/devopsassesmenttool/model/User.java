@@ -30,11 +30,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "user_details")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
@@ -42,14 +42,44 @@ public class User implements Serializable {
 	private String username;
 
 	private String usermailid;
-	
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	private String role;
+
+	private String password;
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Answer> answers = new HashSet<Answer>();
 
 	public User() {
-	
-	}
 
+	}
 
 	/**
 	 * @return the userId
@@ -58,14 +88,13 @@ public class User implements Serializable {
 		return userId;
 	}
 
-
 	/**
-	 * @param userId the userId to set
+	 * @param userId
+	 *            the userId to set
 	 */
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
 
 	/**
 	 * @return the answers
@@ -75,14 +104,13 @@ public class User implements Serializable {
 		return answers;
 	}
 
-
 	/**
-	 * @param answers the answers to set
+	 * @param answers
+	 *            the answers to set
 	 */
 	public void setAnswers(Set<Answer> answers) {
 		this.answers = answers;
 	}
-
 
 	/**
 	 * @return the username
@@ -92,7 +120,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param username the username to set
+	 * @param username
+	 *            the username to set
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -106,7 +135,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param usermailid the usermailid to set
+	 * @param usermailid
+	 *            the usermailid to set
 	 */
 	public void setUsermailid(String usermailid) {
 		this.usermailid = usermailid;
@@ -118,7 +148,3 @@ public class User implements Serializable {
 	}
 
 }
-
-
-
-
