@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -51,6 +52,7 @@ public class Account implements Serializable{
 	/**
 	 * @return the user
 	 */
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

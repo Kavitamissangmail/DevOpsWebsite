@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 
 import com.soprasteria.devopsassesmenttool.model.Account;
 import com.soprasteria.devopsassesmenttool.repository.AccountRepository;
+import com.soprasteria.devopsassesmenttool.repository.UserRepository;
 
 @Service
 public class AccountService {
 	private AccountRepository accountRepository;
 
 	private static List<Account> accounts;
+
+	@Autowired
+	UserRepository userRepository;
 
 	@Autowired
 	public AccountService(AccountRepository accountRepository) {
@@ -73,4 +77,5 @@ public class AccountService {
 	public Account findByUser(Long userId) {
 		return accountRepository.findByUserUserId(userId);
 	}
+
 }

@@ -49,6 +49,7 @@ public class AccountController {
 		account.setUser(user);
 		return accountService.save(account);
 	}
+	
 
 	@RequestMapping(value = "account", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Account updateAccount(@RequestBody Account account) throws URISyntaxException {

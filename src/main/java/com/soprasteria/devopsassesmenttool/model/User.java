@@ -159,9 +159,8 @@ public class User implements Serializable {
 		this.usermailid = usermailid;
 	}
 
-	public User get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+
 
 }

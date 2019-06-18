@@ -8,7 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -16,8 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.soprasteria.devopsassesmenttool.model.Account;
+import com.soprasteria.devopsassesmenttool.model.Category;
+import com.soprasteria.devopsassesmenttool.model.Question;
 import com.soprasteria.devopsassesmenttool.model.User;
 import com.soprasteria.devopsassesmenttool.model.UserToken;
+import com.soprasteria.devopsassesmenttool.repository.AccountRepository;
 import com.soprasteria.devopsassesmenttool.repository.LoginDto;
 import com.soprasteria.devopsassesmenttool.repository.UserRepository;
 import com.soprasteria.devopsassesmenttool.repository.UserTokenRepository;
@@ -33,6 +40,8 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	AccountRepository accountRepository;
 
 	@Autowired
 	UserTokenRepository userTokenRepository;
@@ -143,5 +152,10 @@ public class UserService {
 		return new ApiResponse(200, "LogOut successfull", "Token Deavtivated");
 
 	}
+
+
+	
+	
+
 
 }
