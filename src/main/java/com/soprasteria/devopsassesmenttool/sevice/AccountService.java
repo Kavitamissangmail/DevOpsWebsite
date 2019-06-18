@@ -30,12 +30,14 @@ public class AccountService {
 		return accountRepository.save(account);
 	}
 
-	public Account update(Account account) {
-		if (account.getId() != null && !accountRepository.exists(account.getId())) {
+	public Account update(Account accountRequest) {
+		if (accountRequest.getId() != null && !accountRepository.exists(accountRequest.getId())) {
 			throw new EntityNotFoundException("There is no entity with such ID in the database.");
 		}
+		Account account = accountRepository.getOne(accountRequest.getId());
+		accountRequest.setUser(account.getUser());
 
-		return accountRepository.save(account);
+		return accountRepository.save(accountRequest);
 	}
 
 	public List<Account> findAll() {
@@ -67,7 +69,7 @@ public class AccountService {
 		return null;
 
 	}
-	
+
 	public Account findByUser(Long userId) {
 		return accountRepository.findByUserUserId(userId);
 	}

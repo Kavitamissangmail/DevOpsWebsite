@@ -49,7 +49,7 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
-	public User getUserByUserId(Integer userId) {
+	public User getUserByUserId(Long userId) {
 
 		if (!userRepository.existsByUserId(userId)) {
 			throw new ResourceNotFoundException("User with id " + userId + " not found");
@@ -57,7 +57,7 @@ public class UserService {
 		return userRepository.findByUserId(userId);
 	}
 
-	public User updateUserByUserId(Integer userId, User userRequest) {
+	public User updateUserByUserId(Long userId, User userRequest) {
 
 		if (!userRepository.existsByUserId(userId)) {
 			throw new ResourceNotFoundException("User with id " + userId + " not found");
@@ -77,7 +77,7 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
-	public ResponseEntity<Object> deleteByUserId(Integer userId) {
+	public ResponseEntity<Object> deleteByUserId(Long userId) {
 		if (!userRepository.existsByUserId(userId)) {
 			throw new ResourceNotFoundException("User with id " + userId + " not found");
 		}

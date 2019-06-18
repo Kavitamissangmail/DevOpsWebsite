@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.soprasteria.devopsassesmenttool.model.Answer;
-import com.soprasteria.devopsassesmenttool.model.Question;
 import com.soprasteria.devopsassesmenttool.model.User;
 import com.soprasteria.devopsassesmenttool.repository.AnswerRepository;
 import com.soprasteria.devopsassesmenttool.repository.UserRepository;
@@ -48,7 +47,7 @@ public class AnswerService {
 		return answerRepository.getAnswersByUserUserId(answerId);
 	}
 
-	public Answer createAnswer(Integer userId, Answer answer) {
+	public Answer createAnswer(Long userId, Answer answer) {
 		Set<Answer> answers = new HashSet<Answer>();
 
 		User user = userRepository.findByUserId(userId);
