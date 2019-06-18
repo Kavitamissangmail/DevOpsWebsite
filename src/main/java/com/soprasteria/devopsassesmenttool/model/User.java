@@ -4,7 +4,6 @@
 package com.soprasteria.devopsassesmenttool.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,8 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -43,6 +40,13 @@ public class User implements Serializable {
 
 	private String usermailid;
 
+	private String password;
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private Set<Answer> answers = new HashSet<Answer>();
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	private Account account;
+
 	/**
 	 * @return the role
 	 */
@@ -51,10 +55,26 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param role the role to set
+	 * @param role
+	 *            the role to set
 	 */
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the account
+	 */
+	public Account getAccount() {
+		return account;
+	}
+
+	/**
+	 * @param account
+	 *            the account to set
+	 */
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	/**
@@ -65,17 +85,14 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	private String role;
-
-	private String password;
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private Set<Answer> answers = new HashSet<Answer>();
 
 	public User() {
 

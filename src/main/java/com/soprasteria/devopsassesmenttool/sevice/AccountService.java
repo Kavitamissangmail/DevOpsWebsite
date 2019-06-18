@@ -42,11 +42,11 @@ public class AccountService {
 		return accountRepository.findAll();
 	}
 
-	public Account findOne(Integer id) {
+	public Account findOne(Long id) {
 		return accountRepository.findOne(id);
 	}
 
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		accountRepository.delete(id);
 	}
 

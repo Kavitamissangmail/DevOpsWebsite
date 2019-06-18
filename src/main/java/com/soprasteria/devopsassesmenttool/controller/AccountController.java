@@ -37,7 +37,7 @@ public class AccountController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/account/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getAccount(@PathVariable Integer id) {
+	public ResponseEntity<?> getAccount(@PathVariable Long id) {
 
 		Account account = accountService.findOne(id);
 
@@ -90,7 +90,7 @@ public class AccountController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/account/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> deleteAccount(@PathVariable Integer id) {
+	public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
 
 		Account account = accountService.findOne(id);
 

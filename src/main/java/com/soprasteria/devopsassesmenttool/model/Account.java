@@ -3,12 +3,12 @@ package com.soprasteria.devopsassesmenttool.model;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,7 +25,7 @@ public class Account implements Serializable{
 			
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	private String name;
 
@@ -35,14 +35,34 @@ public class Account implements Serializable{
 
 	private String deliverylocation;
 
+	
+
 	private Integer teamsize;
 
 	private String contracttype;
 
 	private String technology;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
-	private Measure measure;
+
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+	
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date startDate;
@@ -149,13 +169,27 @@ public class Account implements Serializable{
 
 	public Account() {
 	}
+	
 
-	public Integer getId() {
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public String getName() {
