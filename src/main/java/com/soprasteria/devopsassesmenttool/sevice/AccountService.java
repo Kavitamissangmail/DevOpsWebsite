@@ -67,4 +67,8 @@ public class AccountService {
 		return null;
 
 	}
+	
+	public Account findByUser(Long userId) {
+		return accountRepository.findByUserUserId(userId);
+	}
 }

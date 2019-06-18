@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 import com.soprasteria.devopsassesmenttool.model.Question;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Integer> {
+public interface QuestionRepository extends JpaRepository<Question, Long> {
 
-	boolean existsByQId(Integer questionId);
+	boolean existsByQId(Long questionId);
 
-	Question findByQId(Integer questionId);
+	Question findByQId(Long questionId);
 
-	void deleteByQId(Integer questionId);
-	
-	Set<Question> getQuestionsByCategoryCId(Integer categoryId);
+	void deleteByQId(Long questionId);
+
+	Set<Question> getQuestionsByCategoryCId(Long categoryId);
 
 }

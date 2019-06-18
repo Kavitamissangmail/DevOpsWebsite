@@ -102,4 +102,18 @@ public class AccountController {
 
 		return ResponseEntity.ok().build();
 	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/user/{userId}/account", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getAccountByUser(@PathVariable Long userId) {
+
+		Account account = accountService.findByUser(userId);
+
+		if (account == null) {
+			return new ResponseEntity(new CustomErrorType(" Account with id " + userId + "  is not found."),
+					HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Account>(account, HttpStatus.OK);
+	}
+
 }

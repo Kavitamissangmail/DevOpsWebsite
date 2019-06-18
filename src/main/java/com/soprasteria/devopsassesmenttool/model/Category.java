@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -24,7 +23,7 @@ public class Category implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cId;
+	private Long cId;
 
 	private String categoryName;
 
@@ -63,19 +62,17 @@ public class Category implements Serializable {
 		return categoryName;
 	}
 
-
-
 	/**
 	 * @return the cId
 	 */
-	public Integer getcId() {
+	public Long getcId() {
 		return cId;
 	}
 
 	/**
 	 * @param cId the cId to set
 	 */
-	public void setcId(Integer cId) {
+	public void setcId(Long cId) {
 		this.cId = cId;
 	}
 
