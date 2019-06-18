@@ -36,7 +36,7 @@ public class RatingController {
 		return ratingService.getAllRatings();
 	}
 
-	@RequestMapping(value = "/getRating/{ratingId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/rating/{ratingId}", method = RequestMethod.GET)
 	public Rating getRating(@PathVariable(value = "ratingId") Long ratingId) {
 		return ratingService.getRatingByRatingId(ratingId);
 	}
@@ -46,18 +46,18 @@ public class RatingController {
 		return ratingService.getRatingByQuestionId(questionId);
 	}
 
-	@RequestMapping(value = "question/{questionId}/rating", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/question/{questionId}/rating", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Rating createRating(@PathVariable(value = "questionId") Long questionId, @RequestBody Rating rating) {
 		return ratingService.createRating(questionId, rating);
 	}
 
-	@RequestMapping(value = "rating", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/rating", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Rating updateRating(@RequestBody Rating rating) {
 		return ratingService.updateRating(rating);
 	}
 
 	@Transactional
-	@RequestMapping(value = "/question/rating/{ratingId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/rating/{ratingId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteRatingByRatingId(@PathVariable(value = "ratingId") Long ratingId) {
 		return ratingService.deleteRatingByRatingId(ratingId);
 	}
