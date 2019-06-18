@@ -50,27 +50,27 @@ public class UserController {
 
 	@Transactional
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteUserByUserId(@PathVariable(value = "userId") Integer userId) {
+	public ResponseEntity<Object> deleteUserByUserId(@PathVariable(value = "userId") Long userId) {
 		return userService.deleteByUserId(userId);
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ApiResponse login(@RequestBody LoginDto loginDto){
-        return userService.login(loginDto);
-    }
-	
+	public ApiResponse login(@RequestBody LoginDto loginDto) {
+		return userService.login(loginDto);
+	}
 
 	@RequestMapping(value = "/logout/{userName}", method = RequestMethod.GET)
-    public ApiResponse login(@PathVariable(value = "userName") String userName){
-		
+	public ApiResponse login(@PathVariable(value = "userName") String userName) {
+
 		return userService.logout(userName);
-  
-    }
+
+	}
+
 	@RequestMapping(value = "/token/{userName}", method = RequestMethod.GET)
-    public String createToken(@PathVariable(value = "userName") String userName){
-		
+	public String createToken(@PathVariable(value = "userName") String userName) {
+
 		return userService.createToken(userName);
-  
-    }
+
+	}
 
 }

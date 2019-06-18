@@ -33,19 +33,19 @@ public class QuestionController {
 
 	//
 	@RequestMapping(value = "/{categoryId}/question", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Question createQuestion(@PathVariable(value = "categoryId") Integer categoryId,
+	public Question createQuestion(@PathVariable(value = "categoryId") Long categoryId,
 			@RequestBody Question question) {
 		return questionService.createQuestion(categoryId, question);
 	}
 	
 	
 	@RequestMapping(value = "/getQuestions/{categoryId}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Set<Question> getQuestionByCategoryId(@PathVariable(value = "categoryId") Integer categoryId) {
+	public Set<Question> getQuestionByCategoryId(@PathVariable(value = "categoryId") Long categoryId) {
 		return questionService.getQuestionsByCategoryId(categoryId);
 	}
 
 	@RequestMapping(value = "/question/{questionId}", method = RequestMethod.GET)
-	public Question getQuestionById(@PathVariable(value = "questionId") Integer questionId) {
+	public Question getQuestionById(@PathVariable(value = "questionId") Long questionId) {
 		return questionService.getQuestionById(questionId);
 	}
 
@@ -55,7 +55,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/question/{questionId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteQuestionById(@PathVariable(value = "questionId") Integer questionId) {
+	public ResponseEntity<Object> deleteQuestionById(@PathVariable(value = "questionId") Long questionId) {
 		return questionService.deleteQuestionById(questionId);
 	}
 

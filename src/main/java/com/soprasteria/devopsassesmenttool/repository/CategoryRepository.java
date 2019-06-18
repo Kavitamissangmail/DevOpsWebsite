@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 import com.soprasteria.devopsassesmenttool.model.Category;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Integer> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-	boolean existsByCId(Integer id);
+	boolean existsByCId(Long id);
 
-	Optional<Category> findByCId(Integer id);
+	Optional<Category> findByCId(Long id);
 
-	void deleteByCId(Integer id);
+	void deleteByCId(Long id);
 
 }

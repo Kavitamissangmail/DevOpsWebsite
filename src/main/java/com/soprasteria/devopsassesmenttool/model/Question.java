@@ -39,11 +39,11 @@ public class Question implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer qId;
+	private Long qId;
 
 	private String questionlabel;
-    
-	@Column(columnDefinition="text")
+
+	@Column(columnDefinition = "text")
 	private String questionDesc;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,8 +66,7 @@ public class Question implements Serializable {
 	}
 
 	/**
-	 * @param category
-	 *            the category to set
+	 * @param category the category to set
 	 */
 
 	public void setCategory(Category category) {
@@ -100,15 +99,14 @@ public class Question implements Serializable {
 	/**
 	 * @return the qId
 	 */
-	public Integer getqId() {
+	public Long getqId() {
 		return qId;
 	}
 
 	/**
-	 * @param qId
-	 *            the qId to set
+	 * @param qId the qId to set
 	 */
-	public void setqId(Integer qId) {
+	public void setqId(Long qId) {
 		this.qId = qId;
 	}
 
@@ -120,16 +118,14 @@ public class Question implements Serializable {
 	}
 
 	/**
-	 * @param questionlabel
-	 *            the questionlabel to set
+	 * @param questionlabel the questionlabel to set
 	 */
 	public void setQuestionlabel(String questionlabel) {
 		this.questionlabel = questionlabel;
 	}
 
 	/**
-	 * @param questionDesc
-	 *            the questionDesc to set
+	 * @param questionDesc the questionDesc to set
 	 */
 	public void setQuestionDesc(String questionDesc) {
 		this.questionDesc = questionDesc;
@@ -151,8 +147,7 @@ public class Question implements Serializable {
 	}
 
 	/**
-	 * @param ratings
-	 *            the ratings to set
+	 * @param ratings the ratings to set
 	 */
 
 	public void setRatings(Set<Rating> ratings) {

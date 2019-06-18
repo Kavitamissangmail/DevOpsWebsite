@@ -37,16 +37,15 @@ public class QuestionService {
 		return questionRepository.findAll();
 	}
 
-	public Question getQuestionById(Integer questionId) {
+	public Question getQuestionById(Long questionId) {
 		if (!questionRepository.existsByQId(questionId)) {
 			throw new ResourceNotFoundException("Question with id " + questionId + " not found");
 		}
 		return questionRepository.findByQId(questionId);
 	}
 
-	public Question createQuestion(Integer categoryId, Question question) {
+	public Question createQuestion(Long categoryId, Question question) {
 		Set<Question> questions = new HashSet<Question>();
-		Category category1 = new Category();
 
 		Optional<Category> byId = categoryRepository.findByCId(categoryId);
 		if (!byId.isPresent()) {
@@ -85,7 +84,7 @@ public class QuestionService {
 	}
 
 	@Transactional
-	public ResponseEntity<Object> deleteQuestionById(Integer questionId) {
+	public ResponseEntity<Object> deleteQuestionById(Long questionId) {
 		if (!questionRepository.existsByQId(questionId)) {
 			throw new ResourceNotFoundException("question with id " + questionId + " not found");
 		}
@@ -96,7 +95,7 @@ public class QuestionService {
 
 	}
 
-	public Set<Question> getQuestionsByCategoryId(Integer categoryId) {
+	public Set<Question> getQuestionsByCategoryId(Long categoryId) {
 		return questionRepository.getQuestionsByCategoryCId(categoryId);
 	}
 

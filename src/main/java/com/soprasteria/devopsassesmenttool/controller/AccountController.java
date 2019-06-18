@@ -1,15 +1,10 @@
 package com.soprasteria.devopsassesmenttool.controller;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.devopsassesmenttool.model.Account;
+import com.soprasteria.devopsassesmenttool.model.User;
 import com.soprasteria.devopsassesmenttool.sevice.AccountService;
-import com.soprasteria.devopsassesmenttool.util.CustomErrorType;
+import com.soprasteria.devopsassesmenttool.sevice.UserService;
+import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/devops")
 public class AccountController {
 
+	@Autowired
 	private AccountService accountService;
 
-	public AccountController(AccountService accountService) {
-		this.accountService = accountService;
+	@Autowired
+	private UserService userService;
+
+	public AccountController() {
 	}
 
 	@RequestMapping(value = "accounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,71 +35,48 @@ public class AccountController {
 		return accountService.findAll();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/account/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getAccount(@PathVariable Long id) {
-
-		Account account = accountService.findOne(id);
-
-		if (account == null) {
-			return new ResponseEntity(new CustomErrorType(" Account with id " + id + "  is not found."),
-					HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Account>(account, HttpStatus.OK);
+	public Account getAccount(@PathVariable Long id) {
+		return accountService.findOne(id);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "account", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Account> createAccount(@RequestBody Account account) throws URISyntaxException {
-
-		if (accountService.isUserExist(account)) {
-			return new ResponseEntity(
-					new CustomErrorType("Unable to create. Account with name " + account.getName() + " already exist."),
-					HttpStatus.CONFLICT);
+	@RequestMapping(value = "/user/{userId}/account", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Account createAccount(@PathVariable Long userId, @RequestBody Account account) throws URISyntaxException {
+		User user = userService.getUserByUserId(userId);
+		if (user == null) {
+			throw new ResourceNotFoundException("User with user id " + userId + " is does not exist.");
 		}
-		try {
-			Account result = accountService.save(account);
-			return ResponseEntity.created(new URI("/devops/account/" + result.getId())).body(result);
-		} catch (EntityExistsException e) {
-			return new ResponseEntity(
-					new CustomErrorType("Unable to create. Account with id  " + account.getId() + " already exist."),
-					HttpStatus.CONFLICT);
-		}
+		account.setUser(user);
+		return accountService.save(account);
 	}
+	
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "account", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Account> updateAccount(@RequestBody Account account) throws URISyntaxException {
+	public Account updateAccount(@RequestBody Account account) throws URISyntaxException {
 		if (account.getId() == null) {
-
-			return new ResponseEntity(
-					new CustomErrorType("Unable to upate. Account with id " + account.getId() + " not found."),
-					HttpStatus.NOT_FOUND);
+			throw new ResourceNotFoundException("Unable to upate. Account with id " + account.getId() + " not found.");
 		}
-
-		try {
-			Account result = accountService.update(account);
-
-			return ResponseEntity.created(new URI("/devops/account/" + result.getId())).body(result);
-		} catch (EntityNotFoundException e) {
-			return new ResponseEntity(
-					new CustomErrorType("Unable to upate. Account with id " + account.getId() + " not found."),
-					HttpStatus.NOT_FOUND);
-		}
+		return accountService.update(account);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/account/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
+	public void deleteAccount(@PathVariable Long id) {
 
 		Account account = accountService.findOne(id);
 
 		if (account == null) {
-			return new ResponseEntity(new CustomErrorType("Unable to delete. User with id " + id + " not found."),
-					HttpStatus.NOT_FOUND);
+			throw new ResourceNotFoundException("Unable to delete. User with id " + id + " not found.");
 		}
 		accountService.delete(id);
-
-		return ResponseEntity.ok().build();
 	}
+
+	@RequestMapping(value = "/user/{userId}/account", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Account getAccountByUser(@PathVariable Long userId) {
+		User user = userService.getUserByUserId(userId);
+		if (user == null) {
+			throw new ResourceNotFoundException("User with user id " + userId + " is does not exist.");
+		}
+		return accountService.findByUser(userId);
+	}
+
 }

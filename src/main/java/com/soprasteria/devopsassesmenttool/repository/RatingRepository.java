@@ -8,7 +8,6 @@ import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.soprasteria.devopsassesmenttool.model.Answer;
 import com.soprasteria.devopsassesmenttool.model.Rating;
 
 /**
@@ -16,17 +15,14 @@ import com.soprasteria.devopsassesmenttool.model.Rating;
  *
  */
 @Repository
-public interface RatingRepository extends JpaRepository<Rating, Integer> {
-	
-	boolean existsByRid(Integer rid);
+public interface RatingRepository extends JpaRepository<Rating, Long> {
 
-	Rating findByRid(Integer rid);
+	boolean existsByRid(Long rid);
 
-	void deleteByRid(Integer rid);
-	
-	Set<Rating> getRatingsByQuestionQId(Integer qId);
+	Rating findByRid(Long rid);
 
+	void deleteByRid(Long rid);
+
+	Set<Rating> getRatingsByQuestionQId(Long qId);
 
 }
-
-

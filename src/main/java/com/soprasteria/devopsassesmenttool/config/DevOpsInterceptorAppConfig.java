@@ -15,11 +15,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Component
 public class DevOpsInterceptorAppConfig extends WebMvcConfigurerAdapter {
-   @Autowired
-   DevOpsServiceInterceptor devOpsServiceInterceptor;
+	@Autowired
+	DevOpsServiceInterceptor devOpsServiceInterceptor;
 
-   @Override
-   public void addInterceptors(InterceptorRegistry registry) {
-      registry.addInterceptor(devOpsServiceInterceptor);
-   }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(devOpsServiceInterceptor).excludePathPatterns("/devops/login/**", "/devops/logout/**");
+	}
 }

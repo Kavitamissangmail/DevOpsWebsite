@@ -34,7 +34,7 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userId;
+	private Long userId;
 
 	private String username;
 
@@ -55,8 +55,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param role
-	 *            the role to set
+	 * @param role the role to set
 	 */
 	public void setRole(String role) {
 		this.role = role;
@@ -70,8 +69,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param account
-	 *            the account to set
+	 * @param account the account to set
 	 */
 	public void setAccount(Account account) {
 		this.account = account;
@@ -85,8 +83,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param password
-	 *            the password to set
+	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -101,16 +98,22 @@ public class User implements Serializable {
 	/**
 	 * @return the userId
 	 */
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
 	/**
-	 * @param userId
-	 *            the userId to set
+	 * @param userId the userId to set
 	 */
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	/**
@@ -122,8 +125,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param answers
-	 *            the answers to set
+	 * @param answers the answers to set
 	 */
 	public void setAnswers(Set<Answer> answers) {
 		this.answers = answers;
@@ -137,8 +139,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param username
-	 *            the username to set
+	 * @param username the username to set
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -152,16 +153,14 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param usermailid
-	 *            the usermailid to set
+	 * @param usermailid the usermailid to set
 	 */
 	public void setUsermailid(String usermailid) {
 		this.usermailid = usermailid;
 	}
 
-	public User get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+
 
 }

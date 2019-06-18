@@ -3,13 +3,11 @@
  */
 package com.soprasteria.devopsassesmenttool.repository;
 
-import java.util.Set;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.soprasteria.devopsassesmenttool.model.Answer;
-import com.soprasteria.devopsassesmenttool.model.Question;
 import com.soprasteria.devopsassesmenttool.model.User;
 
 /**
@@ -17,17 +15,16 @@ import com.soprasteria.devopsassesmenttool.model.User;
  *
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-	boolean existsByUserId(Integer userId);
+	boolean existsByUserId(Long userId);
 
-	User findByUserId(Integer userId);
+	User findByUserId(Long userId);
 
-	void deleteByUserId(Integer userId);
+	void deleteByUserId(Long userId);
 
 	User findByUsername(String username);
 
 	User findByUsermailid(String email);
-	
 
 }

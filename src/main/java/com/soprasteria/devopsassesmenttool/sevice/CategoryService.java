@@ -4,18 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.soprasteria.devopsassesmenttool.model.Account;
 import com.soprasteria.devopsassesmenttool.model.Category;
 import com.soprasteria.devopsassesmenttool.repository.CategoryRepository;
-import com.soprasteria.devopsassesmenttool.util.CustomErrorType;
 import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 
 @Service
@@ -32,7 +25,7 @@ public class CategoryService {
 		return categoryRepository.findAll();
 	}
 
-	public Optional<Category> getCategoryById(Integer categoryId) {
+	public Optional<Category> getCategoryById(Long categoryId) {
 		if (!categoryRepository.existsByCId(categoryId)) {
 			throw new ResourceNotFoundException("Author with id " + categoryId + " not found");
 		}
@@ -45,7 +38,7 @@ public class CategoryService {
 
 	}
 
-	public Category updateCategoryById(Integer categoryId, Category categoryRequest) {
+	public Category updateCategoryById(Long categoryId, Category categoryRequest) {
 		if (!categoryRepository.existsByCId(categoryId)) {
 			throw new ResourceNotFoundException("category with id " + categoryId + " not found");
 		}
@@ -62,7 +55,7 @@ public class CategoryService {
 
 	}
 
-	public ResponseEntity<Object> deleteCategoryById(Integer categoryId) {
+	public ResponseEntity<Object> deleteCategoryById(Long categoryId) {
 		if (!categoryRepository.existsByCId(categoryId)) {
 			throw new ResourceNotFoundException("category with id " + categoryId + " not found");
 		}

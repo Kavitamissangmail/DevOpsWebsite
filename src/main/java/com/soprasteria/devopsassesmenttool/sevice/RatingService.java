@@ -3,7 +3,6 @@
  */
 package com.soprasteria.devopsassesmenttool.sevice;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.soprasteria.devopsassesmenttool.model.Answer;
 import com.soprasteria.devopsassesmenttool.model.Question;
 import com.soprasteria.devopsassesmenttool.model.Rating;
 import com.soprasteria.devopsassesmenttool.repository.QuestionRepository;
@@ -31,14 +29,25 @@ public class RatingService {
 	QuestionRepository questionRepository;
 
 	public List<Rating> getAllRatings() {
-		// TODO Auto-generated method stub
 		return ratingRepository.findAll();
 	}
+	
+	public Rating getRatingByRatingId(Long ratingId) {
+		return ratingRepository.findOne(ratingId);
+	}
+	
+	public Set<Rating> getRatingByQuestionId(Long questionId) {
+		Question question = questionRepository.findByQId(questionId);
+		if (question == null) {
+			throw new ResourceNotFoundException("Question with id " + questionId + " does not exist");
+		}
+		return ratingRepository.getRatingsByQuestionQId(questionId);
+	}
 
-	public ResponseEntity<Object> deleteRatingByRatingId(Integer ratingId) {
+	public ResponseEntity<Object> deleteRatingByRatingId(Long ratingId) {
 
 		if (!ratingRepository.existsByRid(ratingId)) {
-			throw new ResourceNotFoundException("answer with id " + ratingId + " not found");
+			throw new ResourceNotFoundException("Rating with id " + ratingId + " is not found");
 		}
 
 		ratingRepository.deleteByRid(ratingId);
@@ -46,27 +55,30 @@ public class RatingService {
 		return ResponseEntity.ok().build();
 	}
 
-	public Answer createAnswer(Integer questionId, Rating rating) {
-		// TODO Auto-generated method stub
-		return null;
+	public Rating createRating(Long questionId, Rating rating) {
+		Question question = questionRepository.findByQId(questionId);
+		if (question == null) {
+			throw new ResourceNotFoundException("Question with id " + questionId + " does not exist");
+		}
+
+		// tie Question to Rating
+		rating.setQuestion(question);
+
+		Rating rating2 = ratingRepository.save(rating);
+		return rating2;
 	}
 	
-	/*Set<Answer> answers = new HashSet<Answer>();
+	public Rating updateRating(Rating ratingRequest) {
+		if (!ratingRepository.existsByRid(ratingRequest.getRid())) {
+			throw new ResourceNotFoundException("answer with id " + ratingRequest.getRid() + " not found");
+		}
+		Rating rating = ratingRepository.findByRid(ratingRequest.getRid());
 
-	Question question = questionRepository.findByQId(questionId);
-	if (question == null) {
-		throw new ResourceNotFoundException("question with id " + questionId + " does not exist");
+		rating.setRatingValue(ratingRequest.getRatingValue());
+		rating.setRatinglabel(ratingRequest.getRatinglabel());
+		rating.setRatingDesc(ratingRequest.getRatingDesc());
+
+		return ratingRepository.save(rating);
 	}
-
-	rating.s
-	// tie Category to Question
-	answer.setUser(user);
-
-	Answer answer2 = answerRepository.save(answer);
-	// tie Question to Category
-	answers.add(answer2);
-	// category1.setQuestions(questions);
-
-	return answer2;*/
 
 }
