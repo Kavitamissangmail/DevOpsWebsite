@@ -46,6 +46,7 @@ public class AccountController {
 		if (user == null) {
 			throw new ResourceNotFoundException("User with user id " + userId + " is does not exist.");
 		}
+		account.setUser(user);
 		return accountService.save(account);
 	}
 
