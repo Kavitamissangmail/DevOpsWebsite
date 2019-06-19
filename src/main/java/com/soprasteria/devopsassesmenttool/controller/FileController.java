@@ -1,5 +1,8 @@
 package com.soprasteria.devopsassesmenttool.controller;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -65,6 +68,26 @@ public class FileController {
 	public ResponseEntity<Object> deleteQuestionById(@PathVariable(value = "fileId") Long fileId) {
 		dbFileService.deleteFile(fileId);
 		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/getAllFiles")
+	public List<DBFile> getAllFiles() {
+		return dbFileService.getAllFiles();
+	}
+
+	@GetMapping("/user/{userId}/files")
+	public Set<DBFile> getFilesByUser(@PathVariable Long userId) {
+		return dbFileService.getFileByUserId(userId);
+	}
+
+	@GetMapping("/question/{questionId}/files")
+	public Set<DBFile> getFilesByQuestion(@PathVariable Long questionId) {
+		return dbFileService.getFileByQuestionId(questionId);
+	}
+
+	@GetMapping("/answer/{answerId}/files")
+	public Set<DBFile> getFilesByAnswerId(@PathVariable Long answerId) {
+		return dbFileService.getFileByAnswerId(answerId);
 	}
 
 }
