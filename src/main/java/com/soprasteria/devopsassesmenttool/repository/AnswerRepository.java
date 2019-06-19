@@ -9,26 +9,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.soprasteria.devopsassesmenttool.model.Answer;
-import com.soprasteria.devopsassesmenttool.model.Question;
-import com.soprasteria.devopsassesmenttool.model.User;
 
 /**
  * @author dbkumar
  *
  */
 @Repository
-public interface AnswerRepository extends JpaRepository<Answer, Integer> {
+public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
-	boolean existsByAnswerId(Integer answerId);
+	boolean existsByAnswerId(Long answerId);
 
-	Answer findByAnswerId(Integer answerId);
+	Answer findByAnswerId(Long answerId);
 
-	void deleteByAnswerId(Integer answerId);
-	
-	Set<Answer> getAnswersByUserUserId(Integer userId);
-	
-	
-	
+	void deleteByAnswerId(Long answerId);
 
+	Set<Answer> getAnswersByUserUserId(Long userId);
 
 }

@@ -35,7 +35,7 @@ public class AnswerService {
 		return answerRepository.findAll();
 	}
 
-	public Answer getAnswerByAnswerId(Integer answerId) {
+	public Answer getAnswerByAnswerId(Long answerId) {
 
 		if (!answerRepository.existsByAnswerId(answerId)) {
 			throw new ResourceNotFoundException("Answer with id " + answerId + " not found");
@@ -43,7 +43,7 @@ public class AnswerService {
 		return answerRepository.findByAnswerId(answerId);
 	}
 
-	public Set<Answer> getQuestionsByCategoryId(Integer answerId) {
+	public Set<Answer> getQuestionsByCategoryId(Long answerId) {
 		return answerRepository.getAnswersByUserUserId(answerId);
 	}
 
@@ -82,7 +82,7 @@ public class AnswerService {
 		return answerRepository.save(answer1);
 	}
 
-	public ResponseEntity<Object> deleteAnswerByAnswerId(Integer answerId) {
+	public ResponseEntity<Object> deleteAnswerByAnswerId(Long answerId) {
 		if (!answerRepository.existsByAnswerId(answerId)) {
 			throw new ResourceNotFoundException("answer with id " + answerId + " not found");
 		}
@@ -92,7 +92,7 @@ public class AnswerService {
 		return ResponseEntity.ok().build();
 	}
 
-	public Set<Answer> getAnswerByUserId(Integer userId) {
+	public Set<Answer> getAnswerByUserId(Long userId) {
 		return answerRepository.getAnswersByUserUserId(userId);
 	}
 

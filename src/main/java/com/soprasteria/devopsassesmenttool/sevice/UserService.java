@@ -106,7 +106,7 @@ public class UserService {
 		ut.setToken(GenearteToken(user.getUsername()));
 
 		userTokenRepository.save(ut);
-		return new ApiResponse("Logged in successfully!", ut.getUsername(), ut.getToken(), ut.getUserId());
+		return new ApiResponse(200L, ut.getUsername(), ut.getToken(), ut.getUserId());
 
 	}
 
@@ -148,7 +148,7 @@ public class UserService {
 		long userId = user1.getUserId();
 
 		userTokenRepository.deleteByusername(user);
-		return new ApiResponse("Logged out successfully!", "", "", userId);
+		return new ApiResponse(200L, "", "", userId);
 
 	}
 
