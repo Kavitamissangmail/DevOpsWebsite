@@ -9,34 +9,46 @@ package com.soprasteria.devopsassesmenttool.util;
  */
 public class ApiResponse {
 
-	private int status;
-	private String userrname;
+	private String status;
+	private String userrName;
 	private String token;
+	private long userId;
 
-	public int getStatus() {
-		return status;
+
+	/**
+	 * @return the userrName
+	 */
+	public String getUserrName() {
+		return userrName;
 	}
 
-	public ApiResponse(int status, String userrname, String token) {
+	/**
+	 * @param userrName the userrName to set
+	 */
+	public void setUserrName(String userrName) {
+		this.userrName = userrName;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public long getUserId() {
+		return userId;
+	}
+
+	public ApiResponse(String status, String userrName, String token, long userId) {
 
 		this.status = status;
-		this.userrname = userrname;
+		this.userrName = userrName;
 		this.token = token;
+		this.userId = userId;
 	}
 
 	/**
-	 * @return the userrname
+	 * @param userId the userId to set
 	 */
-	public String getUserrname() {
-		return userrname;
-	}
-
-	/**
-	 * @param userrname
-	 *            the userrname to set
-	 */
-	public void setUserrname(String userrname) {
-		this.userrname = userrname;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	/**
@@ -47,23 +59,25 @@ public class ApiResponse {
 	}
 
 	/**
-	 * @param token
-	 *            the token to set
+	 * @param token the token to set
 	 */
 	public void setToken(String token) {
 		this.token = token;
 	}
 
 	/**
-	 * @param status
-	 *            the status to set
+	 * @return the status
 	 */
-	public void setStatus(int status) {
-		this.status = status;
+	public String getStatus() {
+		return status;
 	}
 
 	/**
-	 * @return the message
+	 * @param status the status to set
 	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 }

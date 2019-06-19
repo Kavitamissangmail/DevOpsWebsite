@@ -8,10 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -19,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.soprasteria.devopsassesmenttool.model.Account;
-import com.soprasteria.devopsassesmenttool.model.Category;
-import com.soprasteria.devopsassesmenttool.model.Question;
 import com.soprasteria.devopsassesmenttool.model.User;
 import com.soprasteria.devopsassesmenttool.model.UserToken;
 import com.soprasteria.devopsassesmenttool.repository.AccountRepository;
@@ -108,10 +102,11 @@ public class UserService {
 		UserToken ut = new UserToken();
 		ut.setIsvalid(true);
 		ut.setUsername(user.getUsername());
+		ut.setUserId(user.getUserId());
 		ut.setToken(GenearteToken(user.getUsername()));
 
 		userTokenRepository.save(ut);
-		return new ApiResponse(200, ut.getUsername(), ut.getToken());
+		return new ApiResponse("Logged in successfully!", ut.getUsername(), ut.getToken(), ut.getUserId());
 
 	}
 
@@ -146,16 +141,15 @@ public class UserService {
 	}
 
 	@Transactional
-	public ApiResponse logout(String UserName) {
+	public ApiResponse logout(String user) {
 
-		userTokenRepository.deleteByusername(UserName);
-		return new ApiResponse(200, "LogOut successfull", "Token Deavtivated");
+		User user1 = userRepository.findByUsername(user);
+
+		long userId = user1.getUserId();
+
+		userTokenRepository.deleteByusername(user);
+		return new ApiResponse("Logged out successfully!", "", "", userId);
 
 	}
-
-
-	
-	
-
 
 }

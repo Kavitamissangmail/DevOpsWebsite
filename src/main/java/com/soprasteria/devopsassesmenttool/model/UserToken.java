@@ -20,59 +20,81 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "user_token")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-public class UserToken  implements Serializable{
-	
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class UserToken implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer seqId;
-	
+
+	private Long userId;
 	private String username;
 	private String token;
-	private  boolean isvalid;
+	private boolean isvalid;
+
 	/**
 	 * @return the seqId
 	 */
 	public Integer getSeqId() {
 		return seqId;
 	}
+
 	/**
 	 * @param seqId the seqId to set
 	 */
 	public void setSeqId(Integer seqId) {
 		this.seqId = seqId;
 	}
+
+	/**
+	 * @return the userId
+	 */
+	public Long getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
 	/**
 	 * @return the username
 	 */
 	public String getUsername() {
 		return username;
 	}
+
 	/**
 	 * @param username the username to set
 	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	/**
 	 * @return the token
 	 */
 	public String getToken() {
 		return token;
 	}
+
 	/**
 	 * @param token the token to set
 	 */
 	public void setToken(String token) {
 		this.token = token;
 	}
+
 	/**
 	 * @return the isvalid
 	 */
 	public boolean isIsvalid() {
 		return isvalid;
 	}
+
 	/**
 	 * @param isvalid the isvalid to set
 	 */
