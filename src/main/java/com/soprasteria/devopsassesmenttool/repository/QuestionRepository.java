@@ -17,5 +17,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 	void deleteByQId(Long questionId);
 
 	Set<Question> getQuestionsByCategoryCId(Long categoryId);
+	
+
 
 }

@@ -31,6 +31,8 @@ public class Category implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+
+	@org.hibernate.annotations.OrderBy(clause = "qId")
 	private Set<Question> Questions = new HashSet<Question>();
 
 	/**

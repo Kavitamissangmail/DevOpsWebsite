@@ -44,6 +44,7 @@ public class User implements Serializable {
 
 	private String password;
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@org.hibernate.annotations.OrderBy(clause = "answerId")
 	private Set<Answer> answers = new HashSet<Answer>();
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")

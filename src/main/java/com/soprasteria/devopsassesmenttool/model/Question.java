@@ -52,6 +52,7 @@ public class Question implements Serializable {
 	private Category category;
 
 	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
+	@org.hibernate.annotations.OrderBy(clause = "rid")
 	private Set<Rating> ratings = new HashSet<Rating>();
 
 	public Question() {
