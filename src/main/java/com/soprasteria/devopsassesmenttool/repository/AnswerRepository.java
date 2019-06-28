@@ -24,5 +24,7 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 	void deleteByAnswerId(Long answerId);
 
 	Set<Answer> getAnswersByUserUserId(Long userId);
+	
+	Answer getAnswerByUserUserIdAndQId(Long userId, Long qId);
 
 }

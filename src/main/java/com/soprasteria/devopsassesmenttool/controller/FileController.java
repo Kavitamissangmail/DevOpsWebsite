@@ -18,17 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.soprasteria.devopsassesmenttool.model.Answer;
 import com.soprasteria.devopsassesmenttool.model.DBFile;
 import com.soprasteria.devopsassesmenttool.model.Question;
 import com.soprasteria.devopsassesmenttool.model.User;
-import com.soprasteria.devopsassesmenttool.repository.QuestionRepository;
-import com.soprasteria.devopsassesmenttool.sevice.AnswerService;
 import com.soprasteria.devopsassesmenttool.sevice.DBFileService;
 import com.soprasteria.devopsassesmenttool.sevice.QuestionService;
 import com.soprasteria.devopsassesmenttool.sevice.UserService;
 import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 import com.soprasteria.devopsassesmenttool.util.UploadFileResponse;
+import com.soprasteria.devopsassesmenttool.util.UserReportDetails;
 
 @RestController
 @RequestMapping("/devops")
@@ -36,19 +34,19 @@ public class FileController {
 
 	@Autowired
 	private DBFileService dbFileService;
-	
+
 	@Autowired
 	QuestionService questionService;
 
 	@Autowired
-	private AnswerService ansService;
-	@Autowired
 	UserService userService;
 
-	@PostMapping("/user/{userId}/question/{questionId}/uploadFile")
-	public UploadFileResponse uploadFile(@PathVariable(value = "userId") Long userId,@PathVariable(value = "questionId") Long questionId,
-			@RequestParam("file") MultipartFile file) {
+	public static final String DOWNLOAD_FILE_PATH="/devops/downloadFile/";
 	
+	@PostMapping("/user/{userId}/question/{questionId}/uploadFile")
+	public UploadFileResponse uploadFile(@PathVariable(value = "userId") Long userId,
+			@PathVariable(value = "questionId") Long questionId, @RequestParam("file") MultipartFile file) {
+
 		User user = userService.getUserByUserId(userId);
 		Question question = questionService.getQuestionById(questionId);
 		if (user == null)
@@ -56,7 +54,7 @@ public class FileController {
 
 		DBFile dbFile = dbFileService.storeFile(file, user.getUserId(), question.getqId());
 
-		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/devops/downloadFile/")
+		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH)
 				.path(dbFile.getId() + "").toUriString();
 
 		return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri, file.getContentType(), 200L,
@@ -97,5 +95,13 @@ public class FileController {
 		return dbFileService.getFileByQuestionId(questionId);
 	}
 
+	@GetMapping("/user/{userId}/userReportDetails")
+	public UserReportDetails getUserReportDetails(@PathVariable(value = "userId") Long userId) {
 
+		User user = userService.getUserByUserId(userId);
+		if (user == null)
+			throw new ResourceNotFoundException("User with ID " + userId + " does not exist!");
+
+		return dbFileService.getUserReportDetails(user);
+	}
 }
