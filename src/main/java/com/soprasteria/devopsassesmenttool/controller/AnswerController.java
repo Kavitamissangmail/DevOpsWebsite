@@ -49,7 +49,7 @@ public class AnswerController {
 	public Answer updateAnswer(@RequestBody Answer answer) {
 		return answerService.updateAnswerByAnswerId(answer);
 	}
-
+ 
 	@Transactional
 	@RequestMapping(value = "/answer/{answerId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteAnswerByAnswerId(@PathVariable(value = "answerId") Long answerId) {

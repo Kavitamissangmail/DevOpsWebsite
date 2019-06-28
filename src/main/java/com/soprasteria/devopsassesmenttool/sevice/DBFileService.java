@@ -36,7 +36,7 @@ public class DBFileService {
 	@Autowired
 	private AnswerRepository ansRepository;
 
-	public DBFile storeFile(MultipartFile file, Long userId, Long qId, Long answerId) {
+	public DBFile storeFile(MultipartFile file, Long userId, Long qId) {
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -46,7 +46,7 @@ public class DBFileService {
 				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
 			}
 
-			DBFile dbFile = new DBFile(fileName, file.getContentType(), userId, qId, answerId, file.getBytes());
+			DBFile dbFile = new DBFile(fileName, file.getContentType(), userId, qId, file.getBytes());
 
 			return dbFileRepository.save(dbFile);
 		} catch (IOException ex) {
@@ -89,11 +89,5 @@ public class DBFileService {
 		return dbFileRepository.findByQId(questionId);
 	}
 
-	public Set<DBFile> getFileByAnswerId(Long answerId) {
-		Answer answer = ansRepository.findOne(answerId);
-		if (answerId == null || answer == null)
-			throw new ResourceNotFoundException("User with " + answerId + " ID does not exist!");
 
-		return dbFileRepository.findByAnswerId(answerId);
-	}
 }

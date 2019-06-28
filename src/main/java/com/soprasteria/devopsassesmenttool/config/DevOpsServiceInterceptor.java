@@ -34,7 +34,8 @@ public class DevOpsServiceInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
-		if (request.getHeader("token") != null) {
+		
+/*		if (request.getHeader("token") != null) {
 			UserToken ut = userTokenRepository.findByToken(request.getHeader("token"));
 			if (ut != null) {
 				return true;
@@ -48,9 +49,9 @@ public class DevOpsServiceInterceptor implements HandlerInterceptor {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			response.getWriter().write("UNAUTHORIZED");
 
-		}
+		}*/
 
-		return false;
+		return true;
 	}
 
 	@Override

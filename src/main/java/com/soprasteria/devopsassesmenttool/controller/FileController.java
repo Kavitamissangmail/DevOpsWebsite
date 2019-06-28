@@ -20,8 +20,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.soprasteria.devopsassesmenttool.model.Answer;
 import com.soprasteria.devopsassesmenttool.model.DBFile;
+import com.soprasteria.devopsassesmenttool.model.Question;
+import com.soprasteria.devopsassesmenttool.model.User;
+import com.soprasteria.devopsassesmenttool.repository.QuestionRepository;
 import com.soprasteria.devopsassesmenttool.sevice.AnswerService;
 import com.soprasteria.devopsassesmenttool.sevice.DBFileService;
+import com.soprasteria.devopsassesmenttool.sevice.QuestionService;
+import com.soprasteria.devopsassesmenttool.sevice.UserService;
 import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 import com.soprasteria.devopsassesmenttool.util.UploadFileResponse;
 
@@ -31,18 +36,25 @@ public class FileController {
 
 	@Autowired
 	private DBFileService dbFileService;
+	
+	@Autowired
+	QuestionService questionService;
 
 	@Autowired
 	private AnswerService ansService;
+	@Autowired
+	UserService userService;
 
-	@PostMapping("/answer/{answerId}/uploadFile")
-	public UploadFileResponse uploadFile(@PathVariable(value = "answerId") Long answerId,
+	@PostMapping("/user/{userId}/question/{questionId}/uploadFile")
+	public UploadFileResponse uploadFile(@PathVariable(value = "userId") Long userId,@PathVariable(value = "questionId") Long questionId,
 			@RequestParam("file") MultipartFile file) {
-		Answer ans = ansService.getAnswerByAnswerId(answerId);
-		if (ans == null)
-			throw new ResourceNotFoundException("Answer with ID " + answerId + " does not exist!");
+	
+		User user = userService.getUserByUserId(userId);
+		Question question = questionService.getQuestionById(questionId);
+		if (user == null)
+			throw new ResourceNotFoundException("Answer with ID " + userId + " does not exist!");
 
-		DBFile dbFile = dbFileService.storeFile(file, ans.getUser().getUserId(), ans.getqId(), ans.getAnswerId());
+		DBFile dbFile = dbFileService.storeFile(file, user.getUserId(), question.getqId());
 
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/devops/downloadFile/")
 				.path(dbFile.getId() + "").toUriString();
@@ -85,9 +97,5 @@ public class FileController {
 		return dbFileService.getFileByQuestionId(questionId);
 	}
 
-	@GetMapping("/answer/{answerId}/files")
-	public Set<DBFile> getFilesByAnswerId(@PathVariable Long answerId) {
-		return dbFileService.getFileByAnswerId(answerId);
-	}
 
 }

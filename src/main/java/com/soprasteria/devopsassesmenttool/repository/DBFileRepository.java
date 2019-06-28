@@ -12,5 +12,4 @@ public interface DBFileRepository extends JpaRepository<DBFile, Long> {
 
 	Set<DBFile> findByQId(Long qId);
 
-	Set<DBFile> findByAnswerId(Long answerId);
 }

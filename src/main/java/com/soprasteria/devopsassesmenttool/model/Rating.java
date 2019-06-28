@@ -5,6 +5,7 @@ package com.soprasteria.devopsassesmenttool.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,9 +37,11 @@ public class Rating implements Serializable {
 	private Long rid;
 
 	private Integer ratingValue;
-
+	@Column(length=1000)
 	private String ratinglabel;
 
+	
+	@Column(length=1000)
 	private String ratingDesc;
 
 	@ManyToOne(fetch = FetchType.EAGER)

@@ -24,7 +24,6 @@ public class DBFile {
 
 	private Long qId;
 
-	private Long answerId;
 
 	@Lob
 	private byte[] data;
@@ -33,12 +32,11 @@ public class DBFile {
 
 	}
 
-	public DBFile(String fileName, String fileType, Long userId, Long qId, Long answerId, byte[] data) {
+	public DBFile(String fileName, String fileType, Long userId, Long qId, byte[] data) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.userId = userId;
 		this.qId = qId;
-		this.answerId = answerId;
 		this.data = data;
 	}
 
@@ -115,16 +113,6 @@ public class DBFile {
 	/**
 	 * @return the answerId
 	 */
-	public Long getAnswerId() {
-		return answerId;
-	}
-
-	/**
-	 * @param answerId the answerId to set
-	 */
-	public void setAnswerId(Long answerId) {
-		this.answerId = answerId;
-	}
 
 	/**
 	 * @return the data

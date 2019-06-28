@@ -13,7 +13,22 @@ public class ApiResponse {
 	private String userrName;
 	private String token;
 	private long userId;
+	private String message;
 
+
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	/**
 	 * @return the userrName
@@ -36,12 +51,13 @@ public class ApiResponse {
 		return userId;
 	}
 
-	public ApiResponse(Long status, String userrName, String token, long userId) {
+	public ApiResponse(Long status, String userrName, String token, long userId,String message) {
 
 		this.status = status;
 		this.userrName = userrName;
 		this.token = token;
 		this.userId = userId;
+		this.message = message;
 	}
 
 	/**

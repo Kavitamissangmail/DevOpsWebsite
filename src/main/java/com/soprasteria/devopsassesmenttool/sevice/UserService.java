@@ -93,7 +93,8 @@ public class UserService {
 	public ApiResponse login(LoginDto loginDto) {
 		User user = userRepository.findByUsername(loginDto.getUsername());
 		if (user == null) {
-			throw new RuntimeException("User does not exist.");
+			return new ApiResponse(200L, loginDto.getUsername(), "",0L,"success");
+			
 		}
 		if (!user.getPassword().equals(loginDto.getPassword())) {
 			throw new RuntimeException("Password mismatch.");
@@ -106,7 +107,7 @@ public class UserService {
 		ut.setToken(GenearteToken(user.getUsername()));
 
 		userTokenRepository.save(ut);
-		return new ApiResponse(200L, ut.getUsername(), ut.getToken(), ut.getUserId());
+		return new ApiResponse(200L, ut.getUsername(), ut.getToken(), ut.getUserId(),"success");
 
 	}
 
@@ -148,7 +149,8 @@ public class UserService {
 		long userId = user1.getUserId();
 
 		userTokenRepository.deleteByusername(user);
-		return new ApiResponse(200L, "", "", userId);
+		
+		return new ApiResponse(200L, "", "", userId,"deleted");
 
 	}
 
