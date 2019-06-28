@@ -49,20 +49,20 @@ public class AnswerController {
 	public Answer updateAnswer(@RequestBody Answer answer) {
 		return answerService.updateAnswerByAnswerId(answer);
 	}
-
+ 
 	@Transactional
 	@RequestMapping(value = "/answer/{answerId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteAnswerByAnswerId(@PathVariable(value = "answerId") Integer answerId) {
+	public ResponseEntity<Object> deleteAnswerByAnswerId(@PathVariable(value = "answerId") Long answerId) {
 		return answerService.deleteAnswerByAnswerId(answerId);
 	}
 
 	@RequestMapping(value = "/getAnswers/user/{userId}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Set<Answer> getAnswerByUserId(@PathVariable(value = "userId") Integer userId) {
+	public Set<Answer> getAnswerByUserId(@PathVariable(value = "userId") Long userId) {
 		return answerService.getAnswerByUserId(userId);
 	}
 
 	@RequestMapping(value = "/answer/{answerId}", method = RequestMethod.GET)
-	public Answer getAnswerById(@PathVariable(value = "answerId") Integer answerId) {
+	public Answer getAnswerById(@PathVariable(value = "answerId") Long answerId) {
 		return answerService.getAnswerByAnswerId(answerId);
 	}
 

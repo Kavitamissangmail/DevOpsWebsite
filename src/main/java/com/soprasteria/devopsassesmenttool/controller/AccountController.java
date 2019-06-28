@@ -33,6 +33,7 @@ public class AccountController {
 	@RequestMapping(value = "accounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Account> getAllAccounts() {
 		return accountService.findAll();
+		
 	}
 
 	@RequestMapping(value = "/account/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
