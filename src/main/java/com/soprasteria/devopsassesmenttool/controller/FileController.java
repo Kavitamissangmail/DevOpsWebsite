@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +51,7 @@ public class FileController {
 		User user = userService.getUserByUserId(userId);
 		Question question = questionService.getQuestionById(questionId);
 		if (user == null)
-			throw new ResourceNotFoundException("Answer with ID " + userId + " does not exist!");
+			throw new ResourceNotFoundException("User with ID " + userId + " does not exist!");
 
 		DBFile dbFile = dbFileService.storeFile(file, user.getUserId(), question.getqId());
 
@@ -103,5 +104,14 @@ public class FileController {
 			throw new ResourceNotFoundException("User with ID " + userId + " does not exist!");
 
 		return dbFileService.getUserReportDetails(user);
+	}
+	
+	@GetMapping("/user/{userId}/userReportFile")
+	public HttpEntity<byte[]>  getUserReportFile(@PathVariable Long userId) {
+		User user = userService.getUserByUserId(userId);
+		if (user == null)
+			throw new ResourceNotFoundException("User with ID " + userId + " does not exist!");
+
+		return dbFileService.exportUserReportDetailsPDF(user);
 	}
 }

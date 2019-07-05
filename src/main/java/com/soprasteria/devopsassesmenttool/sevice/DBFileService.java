@@ -1,16 +1,28 @@
 package com.soprasteria.devopsassesmenttool.sevice;
+import static org.springframework.http.HttpHeaders.CACHE_CONTROL;
+import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
+import static org.springframework.http.HttpHeaders.CONTENT_ENCODING;
+import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
+import static org.springframework.http.HttpHeaders.EXPIRES;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.soprasteria.devopsassesmenttool.model.Answer;
 import com.soprasteria.devopsassesmenttool.model.DBFile;
 import com.soprasteria.devopsassesmenttool.model.Question;
@@ -23,6 +35,8 @@ import com.soprasteria.devopsassesmenttool.repository.RatingRepository;
 import com.soprasteria.devopsassesmenttool.repository.UserRepository;
 import com.soprasteria.devopsassesmenttool.util.FileStorageException;
 import com.soprasteria.devopsassesmenttool.util.MyFileNotFoundException;
+import com.soprasteria.devopsassesmenttool.util.PDFUserReportCreation;
+import com.soprasteria.devopsassesmenttool.util.PDFUtils;
 import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 import com.soprasteria.devopsassesmenttool.util.UserReportDetails;
 import com.soprasteria.devopsassesmenttool.util.UserReportDetails.ReportFileDetails;
@@ -45,6 +59,9 @@ public class DBFileService {
 
 	@Autowired
 	private RatingRepository ratingRepository;
+	
+	@Autowired
+	private PDFUserReportCreation pdfUserReportCreation;
 
 	public static final String DOWNLOAD_FILE_PATH = "/devops/downloadFile/";
 
@@ -131,6 +148,47 @@ public class DBFileService {
 		userRepDetails.setQuestions(reportQuestionDetails);
 
 		return userRepDetails;
+	}
+
+	@SuppressWarnings("unused")
+	public HttpEntity<byte[]> exportUserReportDetailsPDF(User user) {
+		final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		final HttpHeaders headers;
+		final Document document = new Document();
+		UserReportDetails userReportDetails = getUserReportDetails(user);
+		try {
+			final PdfWriter writer = PdfWriter.getInstance(document, byteArrayOutputStream);
+			pdfUserReportCreation.create(document, userReportDetails);
+		} catch (DocumentException ex) {
+			ex.printStackTrace();
+		}
+
+		final byte[] pdfBytes = byteArrayOutputStream.toByteArray();
+		headers = createResponseHeaders(pdfBytes, MediaType.APPLICATION_PDF_VALUE, "UserReportDetails.pdf");
+
+		return new HttpEntity<>(pdfBytes, headers);
+	}
+
+	/**
+	 * Creates the response headers for the new export types.
+	 *
+	 * @param rawBody     the raw body
+	 * @param contentType the content type
+	 * @param filename    the filename
+	 * @return the http headers
+	 */
+	private HttpHeaders createResponseHeaders(final byte[] rawBody, final String contentType, final String filename) {
+		final HttpHeaders headers = new HttpHeaders();
+
+		headers.setContentLength(rawBody.length);
+		headers.add(CONTENT_ENCODING, "UTF-8");
+		headers.add(PDFUtils.CONTENT_TRANSFER_ENCODING, PDFUtils.BINARY);
+		headers.add(CONTENT_TYPE, contentType);
+		headers.add(CONTENT_DISPOSITION, String.format(PDFUtils.VALUE_ATTACHMENT_FILENAME, filename));
+		headers.add(CACHE_CONTROL, PDFUtils.CACHE_CONTROL_VALUE);
+		headers.add(EXPIRES, PDFUtils.EXPIRES_ZERO);
+
+		return headers;
 	}
 
 }
