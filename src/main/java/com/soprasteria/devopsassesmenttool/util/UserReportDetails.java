@@ -5,6 +5,8 @@ package com.soprasteria.devopsassesmenttool.util;
 
 import java.util.List;
 
+import com.soprasteria.devopsassesmenttool.model.Account;
+
 /**
  * @author ddhinakaran
  *
@@ -13,12 +15,32 @@ public class UserReportDetails {
 
 	private Long userId;
 	private String userName;
+	private List<AccountDetails> accountdetails;
+
+	/**
+	 * @return the accountdetails
+	 */
+	public List<AccountDetails> getAccountdetails() {
+		return accountdetails;
+	}
+
+	/**
+	 * @param accountdetails the accountdetails to set
+	 */
+	public void setAccountdetails(List<AccountDetails> accountdetails) {
+		this.accountdetails = accountdetails;
+	}
+
+
 	private List<ReportQuestionDetails> questions;
 
-	public UserReportDetails(Long userId, String userName, List<ReportQuestionDetails> questions) {
+	
+
+	public UserReportDetails(Long userId, String userName, List<ReportQuestionDetails> questions,List<AccountDetails>  accountdetails) {
 		this.userId = userId;
 		this.userName = userName;
 		this.questions = questions;
+		this.accountdetails=accountdetails;
 	}
 
 	public UserReportDetails() {
@@ -70,7 +92,21 @@ public class UserReportDetails {
 	public static class ReportQuestionDetails {
 		private Long questionId;
 		private String questionLabel;
-		private Long ratingId;
+		private Long ratingValue;
+		/**
+		 * @return the ratingValue
+		 */
+		public Long getRatingValue() {
+			return ratingValue;
+		}
+
+		/**
+		 * @param ratingValue the ratingValue to set
+		 */
+		public void setRatingValue(Long ratingValue) {
+			this.ratingValue = ratingValue;
+		}
+
 		private String ratingLabel;
 		private String comment;
 		private List<ReportFileDetails> files;
@@ -79,11 +115,11 @@ public class UserReportDetails {
 
 		}
 
-		public ReportQuestionDetails(Long questionId, String questionLabel, Long ratingId, String ratingLabel,
+		public ReportQuestionDetails(Long questionId, String questionLabel, Long ratingValue, String ratingLabel,
 				String comment, List<ReportFileDetails> files) {
 			this.questionId = questionId;
 			this.questionLabel = questionLabel;
-			this.ratingId = ratingId;
+			this.ratingValue = ratingValue;
 			this.ratingLabel = ratingLabel;
 			this.comment = comment;
 			this.files = files;
@@ -117,19 +153,6 @@ public class UserReportDetails {
 			this.questionLabel = questionLabel;
 		}
 
-		/**
-		 * @return the ratingId
-		 */
-		public Long getRatingId() {
-			return ratingId;
-		}
-
-		/**
-		 * @param ratingId the ratingId to set
-		 */
-		public void setRatingId(Long ratingId) {
-			this.ratingId = ratingId;
-		}
 
 		/**
 		 * @return the ratingLabel
@@ -231,6 +254,63 @@ public class UserReportDetails {
 		public void setFileDownloadLink(String fileDownloadLink) {
 			this.fileDownloadLink = fileDownloadLink;
 		}
+
+	}
+	
+	
+	public static class AccountDetails {
+		
+		private String acclabel;
+		private String acccolname;
+		private String acccolnamedetails;
+	
+		/**
+		 * @return the acclabel
+		 */
+		public String getAcclabel() {
+			return acclabel;
+		}
+		/**
+		 * @param acclabel the acclabel to set
+		 */
+		public void setAcclabel(String acclabel) {
+			this.acclabel = acclabel;
+		}
+		/**
+		 * @return the acccolname
+		 */
+		public String getAcccolname() {
+			return acccolname;
+		}
+		/**
+		 * @param acccolname the acccolname to set
+		 */
+		public void setAcccolname(String acccolname) {
+			this.acccolname = acccolname;
+		}
+		/**
+		 * @return the acccolnamedetails
+		 */
+		public String getAcccolnamedetails() {
+			return acccolnamedetails;
+		}
+		/**
+		 * @param acccolnamedetails the acccolnamedetails to set
+		 */
+		public void setAcccolnamedetails(String acccolnamedetails) {
+			this.acccolnamedetails = acccolnamedetails;
+		}
+		public AccountDetails(String acccolname, String acccolnamedetails, String acclabel) {
+			super();
+			this.acccolname = acccolname;
+			this.acccolnamedetails = acccolnamedetails;
+			this.acclabel = acclabel;
+		}
+		public AccountDetails() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
 
 	}
 }

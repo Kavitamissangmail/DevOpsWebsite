@@ -36,7 +36,7 @@ public class Rating implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long rid;
 
-	private Integer ratingValue;
+	private Long ratingValue;
 	@Column(length=1000)
 	private String ratinglabel;
 
@@ -73,22 +73,27 @@ public class Rating implements Serializable {
 	/**
 	 * @return the ratingValue
 	 */
-	public Integer getRatingValue() {
-		return ratingValue;
-	}
 
-	/**
-	 * @param ratingValue the ratingValue to set
-	 */
-	public void setRatingValue(Integer ratingValue) {
-		this.ratingValue = ratingValue;
-	}
 
 	/**
 	 * @return the ratinglabel
 	 */
 	public String getRatinglabel() {
 		return ratinglabel;
+	}
+
+	/**
+	 * @return the ratingValue
+	 */
+	public Long getRatingValue() {
+		return ratingValue;
+	}
+
+	/**
+	 * @param ratingValue the ratingValue to set
+	 */
+	public void setRatingValue(Long ratingValue) {
+		this.ratingValue = ratingValue;
 	}
 
 	/**

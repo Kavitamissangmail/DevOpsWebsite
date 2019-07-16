@@ -24,5 +24,10 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 	void deleteByRid(Long rid);
 
 	Set<Rating> getRatingsByQuestionQId(Long qId);
+	
+	Rating getRatingsByQuestionQIdAndRatingValue(Long qId,Long rvalue);
+
+	
+
 
 }

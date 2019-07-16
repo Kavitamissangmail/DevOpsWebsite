@@ -107,7 +107,7 @@ public class FileController {
 	}
 	
 	@GetMapping("/user/{userId}/userReportFile")
-	public HttpEntity<byte[]>  getUserReportFile(@PathVariable Long userId) {
+	public HttpEntity<byte[]>  getUserReportFile(@PathVariable Long userId) throws Exception {
 		User user = userService.getUserByUserId(userId);
 		if (user == null)
 			throw new ResourceNotFoundException("User with ID " + userId + " does not exist!");

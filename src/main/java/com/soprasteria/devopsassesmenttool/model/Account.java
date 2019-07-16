@@ -35,10 +35,7 @@ public class Account implements Serializable{
 	private String deliverymanager;
 
 	private String deliverylocation;
-
-	
-
-	private Integer teamsize;
+	private int teamsize;
 
 	private String contracttype;
 
@@ -226,11 +223,18 @@ public class Account implements Serializable{
 		this.deliverylocation = deliverylocation;
 	}
 
-	public Integer getTeamsize() {
+
+	/**
+	 * @return the teamsize
+	 */
+	public int getTeamsize() {
 		return teamsize;
 	}
 
-	public void setTeamsize(Integer teamsize) {
+	/**
+	 * @param teamsize the teamsize to set
+	 */
+	public void setTeamsize(int teamsize) {
 		this.teamsize = teamsize;
 	}
 

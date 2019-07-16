@@ -1,4 +1,5 @@
 package com.soprasteria.devopsassesmenttool.sevice;
+
 import static org.springframework.http.HttpHeaders.CACHE_CONTROL;
 import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
 import static org.springframework.http.HttpHeaders.CONTENT_ENCODING;
@@ -7,6 +8,8 @@ import static org.springframework.http.HttpHeaders.EXPIRES;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -23,11 +26,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.soprasteria.devopsassesmenttool.model.Account;
+import com.soprasteria.devopsassesmenttool.model.AccountLabel;
 import com.soprasteria.devopsassesmenttool.model.Answer;
 import com.soprasteria.devopsassesmenttool.model.DBFile;
 import com.soprasteria.devopsassesmenttool.model.Question;
 import com.soprasteria.devopsassesmenttool.model.Rating;
 import com.soprasteria.devopsassesmenttool.model.User;
+import com.soprasteria.devopsassesmenttool.repository.AccountLabelRespository;
+import com.soprasteria.devopsassesmenttool.repository.AccountRepository;
 import com.soprasteria.devopsassesmenttool.repository.AnswerRepository;
 import com.soprasteria.devopsassesmenttool.repository.DBFileRepository;
 import com.soprasteria.devopsassesmenttool.repository.QuestionRepository;
@@ -39,6 +46,7 @@ import com.soprasteria.devopsassesmenttool.util.PDFUserReportCreation;
 import com.soprasteria.devopsassesmenttool.util.PDFUtils;
 import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 import com.soprasteria.devopsassesmenttool.util.UserReportDetails;
+import com.soprasteria.devopsassesmenttool.util.UserReportDetails.AccountDetails;
 import com.soprasteria.devopsassesmenttool.util.UserReportDetails.ReportFileDetails;
 import com.soprasteria.devopsassesmenttool.util.UserReportDetails.ReportQuestionDetails;
 
@@ -58,10 +66,16 @@ public class DBFileService {
 	private AnswerRepository ansRepository;
 
 	@Autowired
+	private AccountRepository accountRepository;
+
+	@Autowired
 	private RatingRepository ratingRepository;
-	
+
 	@Autowired
 	private PDFUserReportCreation pdfUserReportCreation;
+
+	@Autowired
+	private AccountLabelRespository accountLabelRespository;
 
 	public static final String DOWNLOAD_FILE_PATH = "/devops/downloadFile/";
 
@@ -118,8 +132,40 @@ public class DBFileService {
 		return dbFileRepository.findByQId(questionId);
 	}
 
-	public UserReportDetails getUserReportDetails(User user) {
+	public UserReportDetails getUserReportDetails(User user)  {
 		UserReportDetails userRepDetails = new UserReportDetails();
+		Account account = accountRepository.findByUserUserId(user.getUserId());
+
+		List<AccountLabel> labels = accountLabelRespository.findAll();
+		List<AccountDetails> accountDetails = new ArrayList<>();
+		 try{
+			    Class c = Class.forName("com.soprasteria.devopsassesmenttool.model.Account");
+				System.out.println("Loaded class: " + c);
+				Object obj = c.newInstance();
+				obj=accountRepository.findByUserUserId(user.getUserId());
+				if (account != null) {
+			
+					for(int i=0;i<labels.size();i++ ){
+						
+						
+						AccountDetails accountDetail1 = new AccountDetails();
+						String mdname=labels.get(i).getAcccolname().substring(0, 1).toUpperCase()+labels.get(i).getAcccolname().substring(1);	
+						
+						String cmdname="get"+mdname;
+						accountDetail1.setAcccolnamedetails(String.valueOf(c.getMethod(cmdname).invoke(obj)));
+
+
+				        accountDetail1.setAcccolname(labels.get(i).getAcccolname());
+						accountDetail1.setAcclabel(labels.get(i).getAccountlabel());
+				        accountDetails.add(accountDetail1);
+					
+					}
+					userRepDetails.setAccountdetails(accountDetails);
+				
+				}
+		 }catch (Exception e){
+			  e.printStackTrace();
+		 }
 		userRepDetails.setUserId(user.getUserId());
 		userRepDetails.setUserName(user.getUsername());
 		List<ReportQuestionDetails> reportQuestionDetails = new ArrayList<>();
@@ -130,9 +176,14 @@ public class DBFileService {
 			reportQuestionDetail.setQuestionLabel(question.getQuestionlabel());
 			Answer answer = ansRepository.getAnswerByUserUserIdAndQId(user.getUserId(), question.getqId());
 			if (answer != null) {
-				Rating rating = ratingRepository.findByRid(answer.getRatingId());
-				reportQuestionDetail.setRatingId(rating.getRid());
-				reportQuestionDetail.setRatingLabel(rating.getRatinglabel());
+
+				Rating ratingbyqIdandrId = ratingRepository.getRatingsByQuestionQIdAndRatingValue(question.getqId(),
+						answer.getRatingId());
+				Rating rating = ratingRepository.findByRid(ratingbyqIdandrId.getRid());
+				if (rating != null) {
+					reportQuestionDetail.setRatingValue(rating.getRatingValue());
+					reportQuestionDetail.setRatingLabel(rating.getRatinglabel());
+				}
 				reportQuestionDetail.setComment(answer.getComment());
 			}
 			List<ReportFileDetails> reportFiles = new ArrayList<>();
@@ -151,7 +202,7 @@ public class DBFileService {
 	}
 
 	@SuppressWarnings("unused")
-	public HttpEntity<byte[]> exportUserReportDetailsPDF(User user) {
+	public HttpEntity<byte[]> exportUserReportDetailsPDF(User user) throws Exception {
 		final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		final HttpHeaders headers;
 		final Document document = new Document();
@@ -172,9 +223,12 @@ public class DBFileService {
 	/**
 	 * Creates the response headers for the new export types.
 	 *
-	 * @param rawBody     the raw body
-	 * @param contentType the content type
-	 * @param filename    the filename
+	 * @param rawBody
+	 *            the raw body
+	 * @param contentType
+	 *            the content type
+	 * @param filename
+	 *            the filename
 	 * @return the http headers
 	 */
 	private HttpHeaders createResponseHeaders(final byte[] rawBody, final String contentType, final String filename) {
