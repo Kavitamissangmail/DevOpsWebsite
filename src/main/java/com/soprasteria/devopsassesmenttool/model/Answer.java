@@ -5,6 +5,7 @@ package com.soprasteria.devopsassesmenttool.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -33,14 +34,36 @@ public class Answer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long answerId;
+	private Long cId;
 	private Long qId;
-	private Long ratingId;
+	private Long ratingValue;
+	private Long targetRatingValue;
+
+	@Column(length = 1000)
 	private String comment;
+
+	@Column(length = 1000)
+	private String targetComment;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "useridanswerlink", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
+
+	/**
+	 * @return the cId
+	 */
+	public Long getcId() {
+		return cId;
+	}
+
+	/**
+	 * @param cId
+	 *            the cId to set
+	 */
+	public void setcId(Long cId) {
+		this.cId = cId;
+	}
 
 	/**
 	 * @return the answerId
@@ -50,7 +73,8 @@ public class Answer implements Serializable {
 	}
 
 	/**
-	 * @param answerId the answerId to set
+	 * @param answerId
+	 *            the answerId to set
 	 */
 	public void setAnswerId(Long answerId) {
 		this.answerId = answerId;
@@ -65,7 +89,8 @@ public class Answer implements Serializable {
 	}
 
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
@@ -83,24 +108,11 @@ public class Answer implements Serializable {
 	}
 
 	/**
-	 * @param qId the qId to set
+	 * @param qId
+	 *            the qId to set
 	 */
 	public void setqId(Long qId) {
 		this.qId = qId;
-	}
-
-	/**
-	 * @return the ratingId
-	 */
-	public Long getRatingId() {
-		return ratingId;
-	}
-
-	/**
-	 * @param ratingId the ratingId to set
-	 */
-	public void setRatingId(Long ratingId) {
-		this.ratingId = ratingId;
 	}
 
 	/**
@@ -118,10 +130,55 @@ public class Answer implements Serializable {
 	}
 
 	/**
-	 * @param comment the comment to set
+	 * @param comment
+	 *            the comment to set
 	 */
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
 
+	/**
+	 * @return the ratingValue
+	 */
+	public Long getRatingValue() {
+		return ratingValue;
+	}
+
+	/**
+	 * @param ratingValue
+	 *            the ratingValue to set
+	 */
+	public void setRatingValue(Long ratingValue) {
+		this.ratingValue = ratingValue;
+	}
+
+	/**
+	 * @return the targetRatingValue
+	 */
+	public Long getTargetRatingValue() {
+		return targetRatingValue;
+	}
+
+	/**
+	 * @param targetRatingValue
+	 *            the targetRatingValue to set
+	 */
+	public void setTargetRatingValue(Long targetRatingValue) {
+		this.targetRatingValue = targetRatingValue;
+	}
+
+	/**
+	 * @return the targetComment
+	 */
+	public String getTargetComment() {
+		return targetComment;
+	}
+
+	/**
+	 * @param targetComment
+	 *            the targetComment to set
+	 */
+	public void setTargetComment(String targetComment) {
+		this.targetComment = targetComment;
+	}
 }

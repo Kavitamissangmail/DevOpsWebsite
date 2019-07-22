@@ -31,6 +31,7 @@ public class UserToken implements Serializable {
 	private String username;
 	private String token;
 	private boolean isvalid;
+	private String role;
 
 	/**
 	 * @return the seqId
@@ -44,6 +45,20 @@ public class UserToken implements Serializable {
 	 */
 	public void setSeqId(Integer seqId) {
 		this.seqId = seqId;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	/**

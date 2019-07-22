@@ -26,15 +26,23 @@ public class PDFUtils {
 
 	/** The Constant K2. */
 	public static final int K2 = 2;
+	/** The Constant K4. */
+	public static final int K4 = 4;
 
 	/** The Constant K5. */
 	public static final int K5 = 5;
 
 	/** The Constant K6. */
 	public static final int K6 = 6;
+	/** The Constant K6. */
+	public static final int K8 = 8;
+	/** The Constant K11. */
+	public static final int K11 = 11;
 
 	/** The Constant K12. */
 	public static final int K12 = 12;
+	/** The Constant K25. */
+	public static final int K25= 25;
 
 	/** The Constant K50. */
 	public static final int K50 = 50;
@@ -115,6 +123,8 @@ public class PDFUtils {
 	public void addElementToCellContent(PdfPTable table, String value) {
 		table.addCell(createCellContent(value, true));
 	}
+	
+
 
 	public void addElementToCellHeading(PdfPTable table, String value) {
 		table.addCell(createCellHeading(value, true));
@@ -221,4 +231,6 @@ public class PDFUtils {
 		pageTabledefault.setWidthPercentage(K100);
 		return pageTabledefault;
 	}
+
+
 }

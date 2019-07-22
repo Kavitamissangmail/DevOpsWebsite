@@ -19,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -28,15 +29,34 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "account_label")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class AccountLabel  implements Serializable{
-	
+public class AccountLabel implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JsonIgnore
 	private String acccolname;
 
 	private String accountlabel;
+
+	@JsonIgnore
+	private String tablename;
+
+	/**
+	 * @return the tablename
+	 */
+	public String getTablename() {
+		return tablename;
+	}
+
+	/**
+	 * @param tablename
+	 *            the tablename to set
+	 */
+	public void setTablename(String tablename) {
+		this.tablename = tablename;
+	}
 
 	/**
 	 * @return the dropdown
@@ -46,19 +66,20 @@ public class AccountLabel  implements Serializable{
 	}
 
 	/**
-	 * @param dropdown the dropdown to set
+	 * @param dropdown
+	 *            the dropdown to set
 	 */
 	public void setDropdown(List<String> dropdown) {
 		this.dropdown = dropdown;
 	}
 
 	private String qtype;
-	
-	   @Column(name="dropdownlist")
-	   @ElementCollection(fetch = FetchType.EAGER)
-	   @Embedded
-	  private List<String> dropdown = new ArrayList<String>();
-	
+
+	@Column(name = "dropdownlist")
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Embedded
+	private List<String> dropdown = new ArrayList<String>();
+
 	/**
 	 * @return the id
 	 */
@@ -67,13 +88,12 @@ public class AccountLabel  implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	/**
 	 * @return the acccolname
@@ -83,7 +103,8 @@ public class AccountLabel  implements Serializable{
 	}
 
 	/**
-	 * @param acccolname the acccolname to set
+	 * @param acccolname
+	 *            the acccolname to set
 	 */
 	public void setAcccolname(String acccolname) {
 		this.acccolname = acccolname;
@@ -97,7 +118,8 @@ public class AccountLabel  implements Serializable{
 	}
 
 	/**
-	 * @param accountlabel the accountlabel to set
+	 * @param accountlabel
+	 *            the accountlabel to set
 	 */
 	public void setAccountlabel(String accountlabel) {
 		this.accountlabel = accountlabel;
@@ -111,12 +133,11 @@ public class AccountLabel  implements Serializable{
 	}
 
 	/**
-	 * @param qtype the qtype to set
+	 * @param qtype
+	 *            the qtype to set
 	 */
 	public void setQtype(String qtype) {
 		this.qtype = qtype;
 	}
-
-
 
 }

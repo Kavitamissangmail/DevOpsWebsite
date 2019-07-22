@@ -3,6 +3,7 @@
  */
 package com.soprasteria.devopsassesmenttool.repository;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,7 +25,9 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 	void deleteByAnswerId(Long answerId);
 
 	Set<Answer> getAnswersByUserUserId(Long userId);
-	
+
 	Answer getAnswerByUserUserIdAndQId(Long userId, Long qId);
+
+	List<Answer> getAnswersByUserUserIdAndCId(Long userId, Long cId);
 
 }

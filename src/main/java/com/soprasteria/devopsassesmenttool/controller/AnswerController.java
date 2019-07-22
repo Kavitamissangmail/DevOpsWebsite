@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.soprasteria.devopsassesmenttool.model.Answer;
 import com.soprasteria.devopsassesmenttool.sevice.AnswerService;
 import com.soprasteria.devopsassesmenttool.sevice.UserService;
+import com.soprasteria.devopsassesmenttool.util.CategorizedAnswers;
 
 /**
  * @author dbkumar
@@ -56,7 +57,7 @@ public class AnswerController {
 		return answerService.deleteAnswerByAnswerId(answerId);
 	}
 
-	@RequestMapping(value = "/getAnswers/user/{userId}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getAnswers/user/{userId}", method = RequestMethod.GET)
 	public Set<Answer> getAnswerByUserId(@PathVariable(value = "userId") Long userId) {
 		return answerService.getAnswerByUserId(userId);
 	}
@@ -64,6 +65,17 @@ public class AnswerController {
 	@RequestMapping(value = "/answer/{answerId}", method = RequestMethod.GET)
 	public Answer getAnswerById(@PathVariable(value = "answerId") Long answerId) {
 		return answerService.getAnswerByAnswerId(answerId);
+	}
+	
+	@RequestMapping(value = "/getCategorizedAnswers/user/{userId}", method = RequestMethod.GET)
+	public List<CategorizedAnswers>  getCategorizedAnswers(@PathVariable(value = "userId") Long userId) {
+		return answerService.getCategorizedAnswers(userId);
+	}
+	
+	
+	@RequestMapping(value = "/getCategorizedAnswersByCId/{CId}/user/{userId}", method = RequestMethod.GET)
+	public List<CategorizedAnswers>  getCategorizedAnswersByCId(@PathVariable(value = "CId") Long CId,@PathVariable(value = "userId") Long userId) {
+		return answerService.getCategorizedAnswersByCId(userId, CId);
 	}
 
 }

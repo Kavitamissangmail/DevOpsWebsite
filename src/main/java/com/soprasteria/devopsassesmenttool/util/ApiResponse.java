@@ -14,7 +14,22 @@ public class ApiResponse {
 	private String token;
 	private long userId;
 	private String message;
+	private String role;
 
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	/**
 	 * @return the message
@@ -51,13 +66,14 @@ public class ApiResponse {
 		return userId;
 	}
 
-	public ApiResponse(Long status, String userrName, String token, long userId,String message) {
+	public ApiResponse(Long status, String userrName, String token, long userId,String message,String role) {
 
 		this.status = status;
 		this.userrName = userrName;
 		this.token = token;
 		this.userId = userId;
 		this.message = message;
+		this.role=role;
 	}
 
 	/**

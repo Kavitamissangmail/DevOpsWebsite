@@ -93,35 +93,29 @@ public class UserReportDetails {
 		private Long questionId;
 		private String questionLabel;
 		private Long ratingValue;
-		/**
-		 * @return the ratingValue
-		 */
-		public Long getRatingValue() {
-			return ratingValue;
-		}
-
-		/**
-		 * @param ratingValue the ratingValue to set
-		 */
-		public void setRatingValue(Long ratingValue) {
-			this.ratingValue = ratingValue;
-		}
-
+		private Long targetRatingValue;
 		private String ratingLabel;
+		private String targetRatingLabel;
+
 		private String comment;
+		private String targetComment;
+
+
 		private List<ReportFileDetails> files;
 
 		public ReportQuestionDetails() {
 
 		}
 
-		public ReportQuestionDetails(Long questionId, String questionLabel, Long ratingValue, String ratingLabel,
+		public ReportQuestionDetails(Long questionId, String questionLabel, Long ratingValue, String ratingLabel,Long targetRatingValue,String targetComment,
 				String comment, List<ReportFileDetails> files) {
 			this.questionId = questionId;
 			this.questionLabel = questionLabel;
 			this.ratingValue = ratingValue;
 			this.ratingLabel = ratingLabel;
 			this.comment = comment;
+			this.targetComment=targetComment;
+			this.targetRatingValue=targetRatingValue;
 			this.files = files;
 		}
 
@@ -180,6 +174,64 @@ public class UserReportDetails {
 		 */
 		public void setComment(String comment) {
 			this.comment = comment;
+		}
+		
+		
+		/**
+		 * @return the ratingValue
+		 */
+		public Long getRatingValue() {
+			return ratingValue;
+		}
+
+		/**
+		 * @param ratingValue the ratingValue to set
+		 */
+		public void setRatingValue(Long ratingValue) {
+			this.ratingValue = ratingValue;
+		}
+
+		
+		/**
+		 * @return the targetRatingValue
+		 */
+		public Long getTargetRatingValue() {
+			return targetRatingValue;
+		}
+
+		/**
+		 * @param targetRatingValue the targetRatingValue to set
+		 */
+		public void setTargetRatingValue(Long targetRatingValue) {
+			this.targetRatingValue = targetRatingValue;
+		}
+
+		/**
+		 * @return the targetComment
+		 */
+		public String getTargetComment() {
+			return targetComment;
+		}
+
+		/**
+		 * @param targetComment the targetComment to set
+		 */
+		public void setTargetComment(String targetComment) {
+			this.targetComment = targetComment;
+		}
+		
+		/**
+		 * @return the targetRatingLabel
+		 */
+		public String getTargetRatingLabel() {
+			return targetRatingLabel;
+		}
+
+		/**
+		 * @param targetRatingLabel the targetRatingLabel to set
+		 */
+		public void setTargetRatingLabel(String targetRatingLabel) {
+			this.targetRatingLabel = targetRatingLabel;
 		}
 
 		/**

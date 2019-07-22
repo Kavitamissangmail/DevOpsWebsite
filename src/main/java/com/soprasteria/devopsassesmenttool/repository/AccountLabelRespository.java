@@ -18,7 +18,8 @@ public interface AccountLabelRespository extends JpaRepository<AccountLabel, Lon
 
 
 	void deleteById(Long id);
-     AccountLabel findByacccolname(String acccolName);
+    AccountLabel findByacccolname(String acccolName);
+    AccountLabel findBytablename(String tablename);
 
 	
 

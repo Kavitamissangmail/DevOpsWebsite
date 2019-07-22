@@ -140,7 +140,7 @@ public class DBFileService {
 		List<AccountDetails> accountDetails = new ArrayList<>();
 		 try{
 			    Class c = Class.forName("com.soprasteria.devopsassesmenttool.model.Account");
-				System.out.println("Loaded class: " + c);
+	
 				Object obj = c.newInstance();
 				obj=accountRepository.findByUserUserId(user.getUserId());
 				if (account != null) {
@@ -178,13 +178,23 @@ public class DBFileService {
 			if (answer != null) {
 
 				Rating ratingbyqIdandrId = ratingRepository.getRatingsByQuestionQIdAndRatingValue(question.getqId(),
-						answer.getRatingId());
+						answer.getRatingValue());
 				Rating rating = ratingRepository.findByRid(ratingbyqIdandrId.getRid());
+				
+				Rating targetRatingbyqIdandrId = ratingRepository.getRatingsByQuestionQIdAndRatingValue(question.getqId(),
+						answer.getTargetRatingValue());
+				Rating targetRating = ratingRepository.findByRid(targetRatingbyqIdandrId.getRid());
 				if (rating != null) {
 					reportQuestionDetail.setRatingValue(rating.getRatingValue());
 					reportQuestionDetail.setRatingLabel(rating.getRatinglabel());
 				}
+				
+				if (targetRating != null) {
+					reportQuestionDetail.setTargetRatingValue(targetRating.getRatingValue());
+					reportQuestionDetail.setTargetRatingLabel(targetRating.getRatinglabel());
+				}
 				reportQuestionDetail.setComment(answer.getComment());
+				reportQuestionDetail.setTargetComment(answer.getTargetComment());
 			}
 			List<ReportFileDetails> reportFiles = new ArrayList<>();
 			Set<DBFile> qFiles = dbFileRepository.findByQId(question.getqId());
