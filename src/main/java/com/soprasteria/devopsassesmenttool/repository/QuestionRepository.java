@@ -19,5 +19,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 	Set<Question> getQuestionsByCategoryCId(Long categoryId);
 	
 
+	
+
 
 }

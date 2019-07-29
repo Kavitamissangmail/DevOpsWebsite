@@ -8,8 +8,12 @@ import com.soprasteria.devopsassesmenttool.model.DBFile;
 
 public interface DBFileRepository extends JpaRepository<DBFile, Long> {
 
-	Set<DBFile> findByUserId(Long userId);
+	Set<DBFile> findByUserIdOrderByQIdAsc(Long userId);
+
 
 	Set<DBFile> findByQId(Long qId);
+	
+
+
 
 }

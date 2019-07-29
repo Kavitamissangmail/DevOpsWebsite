@@ -35,12 +35,12 @@ public class AccountLabel implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JsonIgnore
+
 	private String acccolname;
 
 	private String accountlabel;
 
-	@JsonIgnore
+
 	private String tablename;
 
 	/**

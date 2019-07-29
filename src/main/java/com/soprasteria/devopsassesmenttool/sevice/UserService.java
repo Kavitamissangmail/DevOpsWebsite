@@ -15,11 +15,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.soprasteria.devopsassesmenttool.model.User;
 import com.soprasteria.devopsassesmenttool.model.UserToken;
 import com.soprasteria.devopsassesmenttool.repository.AccountRepository;
+import com.soprasteria.devopsassesmenttool.repository.AnswerRepository;
 import com.soprasteria.devopsassesmenttool.repository.LoginDto;
+import com.soprasteria.devopsassesmenttool.repository.QuestionRepository;
 import com.soprasteria.devopsassesmenttool.repository.UserRepository;
 import com.soprasteria.devopsassesmenttool.repository.UserTokenRepository;
 import com.soprasteria.devopsassesmenttool.util.ApiResponse;
@@ -38,10 +41,23 @@ public class UserService {
 	AccountRepository accountRepository;
 
 	@Autowired
+	AnswerRepository answerRepository;
+
+	@Autowired
 	UserTokenRepository userTokenRepository;
+	
+	@Autowired
+    QuestionRepository questionRepository;
 
 	public List<User> getAllUsers() {
-		return userRepository.findAll();
+		
+		List<User> users = userRepository.findAll();
+		
+		users.forEach(user ->{
+			user.setStatus(getUserStatus(user.getUserId()));
+		});
+		
+		return users;
 	}
 
 	public User createUser(User user) {
@@ -57,7 +73,10 @@ public class UserService {
 		if (!userRepository.existsByUserId(userId)) {
 			throw new ResourceNotFoundException("User with id " + userId + " not found");
 		}
-		return userRepository.findByUserId(userId);
+		User user = userRepository.findByUserId(userId);
+		user.setStatus(getUserStatus(user.getUserId()));
+		return user;
+		
 	}
 
 	public User updateUserByUserId(Long userId, User userRequest) {
@@ -76,6 +95,8 @@ public class UserService {
 		user.setUsername(userRequest.getUsername());
 		user.setRole(userRequest.getRole());
 		user.setPassword(userRequest.getPassword());
+		user.setLoginName(userRequest.getLoginName());
+		user.setAccountName(userRequest.getAccountName());
 
 		return userRepository.save(user);
 	}
@@ -93,8 +114,8 @@ public class UserService {
 	public ApiResponse login(LoginDto loginDto) {
 		User user = userRepository.findByUsername(loginDto.getUsername());
 		if (user == null) {
-			return new ApiResponse(200L, loginDto.getUsername(), "",0L,"success","");
-			
+			return new ApiResponse(200L, loginDto.getUsername(), "", 0L, "success", "");
+
 		}
 		if (!user.getPassword().equals(loginDto.getPassword())) {
 			throw new RuntimeException("Password mismatch.");
@@ -108,7 +129,7 @@ public class UserService {
 		ut.setRole(user.getRole());
 
 		userTokenRepository.save(ut);
-		return new ApiResponse(200L, ut.getUsername(), ut.getToken(), ut.getUserId(),"success",ut.getRole());
+		return new ApiResponse(200L, ut.getUsername(), ut.getToken(), ut.getUserId(), "success", ut.getRole());
 
 	}
 
@@ -150,8 +171,24 @@ public class UserService {
 		long userId = user1.getUserId();
 
 		userTokenRepository.deleteByusername(user);
-		
-		return new ApiResponse(200L, "", "", userId,"deleted","");
+
+		return new ApiResponse(200L, "", "", userId, "deleted", "");
+
+	}
+
+	public String getUserStatus(Long userId) {
+
+		Long count = answerRepository.countByUserUserId(userId);
+
+		if (count == 0) {
+			return "Not Started";
+		}
+
+		else if (count == questionRepository.count()) {
+			return "Completed ";
+		} else {
+			return "In Progress";
+		}
 
 	}
 

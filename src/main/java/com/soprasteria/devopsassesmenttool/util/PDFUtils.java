@@ -34,6 +34,9 @@ public class PDFUtils {
 
 	/** The Constant K6. */
 	public static final int K6 = 6;
+	
+	/** The Constant K7. */
+	public static final int K7 = 7;
 	/** The Constant K6. */
 	public static final int K8 = 8;
 	/** The Constant K11. */
@@ -46,6 +49,11 @@ public class PDFUtils {
 
 	/** The Constant K50. */
 	public static final int K50 = 50;
+	/** The Constant K40. */
+	public static final int K40 = 40;
+	
+	/** The Constant K55. */
+	public static final int K55 = 55;
 
 	/** The Constant K68. */
 	public static final int K68 = 68;
@@ -63,7 +71,7 @@ public class PDFUtils {
 	static final Font CONTENT_FONT = new Font(Font.FontFamily.HELVETICA, 11);
 
 	/** The constant HEADER VALUE FONT. */
-	static final Font HEADER_VALUE_FONT = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+	static final Font HEADER_VALUE_FONT = new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD);
 
 	/** The constant HELVETICA_BOLD_FONT. */
 	public static final Font HELVETICA_BOLD_FONT = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
@@ -107,6 +115,8 @@ public class PDFUtils {
 		pageTabledefault.setWidths(customiseWidth);
 		return pageTabledefault;
 	}
+	
+
 
 	public void addElementToCellContentWithoutBorder(PdfPTable table, String value) {
 		table.addCell(createCellContent(value, false));

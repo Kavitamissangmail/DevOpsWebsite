@@ -28,6 +28,7 @@ import com.soprasteria.devopsassesmenttool.sevice.UserService;
 import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 import com.soprasteria.devopsassesmenttool.util.UploadFileResponse;
 import com.soprasteria.devopsassesmenttool.util.UserReportDetails;
+import com.soprasteria.devopsassesmenttool.util.UserReportDetails.ReportFileDetails;
 
 @RestController
 @RequestMapping("/devops")
@@ -56,10 +57,10 @@ public class FileController {
 		DBFile dbFile = dbFileService.storeFile(file, user.getUserId(), question.getqId());
 
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH)
-				.path(dbFile.getId() + "").toUriString();
+				.path(dbFile.getFileId() + "").toUriString();
 
 		return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri, file.getContentType(), 200L,
-				dbFile.getId(), file.getSize());
+				dbFile.getFileId(), file.getSize());
 	}
 
 	@GetMapping("/downloadFile/{fileId}")

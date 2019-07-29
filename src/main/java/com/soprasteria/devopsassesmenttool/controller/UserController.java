@@ -37,6 +37,11 @@ public class UserController {
 	public List<User> getUsers() {
 		return userService.getAllUsers();
 	}
+	
+	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET)
+	public User getUserByUserId(@PathVariable(value = "userId") Long userId) {
+		return userService.getUserByUserId(userId);
+	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User createUser(@RequestBody User user) {

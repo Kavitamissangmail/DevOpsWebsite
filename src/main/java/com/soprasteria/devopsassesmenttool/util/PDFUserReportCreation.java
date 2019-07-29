@@ -7,8 +7,9 @@ import static com.soprasteria.devopsassesmenttool.util.PDFUtils.K1;
 import static com.soprasteria.devopsassesmenttool.util.PDFUtils.K2;
 import static com.soprasteria.devopsassesmenttool.util.PDFUtils.K25;
 import static com.soprasteria.devopsassesmenttool.util.PDFUtils.K4;
-import static com.soprasteria.devopsassesmenttool.util.PDFUtils.K5;
+import static com.soprasteria.devopsassesmenttool.util.PDFUtils.K40;
 import static com.soprasteria.devopsassesmenttool.util.PDFUtils.K50;
+import static com.soprasteria.devopsassesmenttool.util.PDFUtils.K8;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -23,7 +24,6 @@ import org.springframework.stereotype.Component;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
@@ -161,7 +161,6 @@ public class PDFUserReportCreation {
 
 			List<AccountLabel> labels = accountLabelRespository.findAll();
 			Class c = Class.forName("com.soprasteria.devopsassesmenttool.model.Account");
-			System.out.println("Loaded class: " + c);
 			Object obj = c.newInstance();
 			obj = user.getAccount();
 			if (user.getAccount() != null) {
@@ -197,12 +196,15 @@ public class PDFUserReportCreation {
 		document.add(p);
 		document.add(Chunk.NEWLINE);
 
-		PdfPTable userReportTable = pdfUtils.createpdfTable(K5);
+		PdfPTable userReportTable = pdfUtils.createpdfTablebyCustomiseWidthWithSplit(K8, new int[] { K50, K40 ,K50, K50,K50, K50,K50,K50});
 
 		pdfUtils.addElementToCellHeading(userReportTable, "Questions");
 		pdfUtils.addElementToCellHeading(userReportTable, "Rating");
 		pdfUtils.addElementToCellHeading(userReportTable, "Rating Desc");
 		pdfUtils.addElementToCellHeading(userReportTable, "Comment");
+		pdfUtils.addElementToCellHeading(userReportTable, "Target Rating");
+		pdfUtils.addElementToCellHeading(userReportTable, "Target Rating Desc");
+		pdfUtils.addElementToCellHeading(userReportTable, "Taregt Comment");
 		pdfUtils.addElementToCellHeading(userReportTable, "Files");
 
 		if (!userReportDetails.getQuestions().isEmpty()) {
@@ -213,6 +215,9 @@ public class PDFUserReportCreation {
 				pdfUtils.addElementToCellContent(userReportTable, getString(question.getRatingValue()));
 				pdfUtils.addElementToCellContent(userReportTable, getString(question.getRatingLabel()));
 				pdfUtils.addElementToCellContent(userReportTable, getString(question.getComment()));
+				pdfUtils.addElementToCellContent(userReportTable, getString(question.getTargetRatingValue()));			
+				pdfUtils.addElementToCellContent(userReportTable, getString(question.getTargetRatingLabel()));
+				pdfUtils.addElementToCellContent(userReportTable, getString(question.getTargetComment()));	
 
 				if (!question.getFiles().isEmpty()) {
 					PdfPTable table = pdfUtils.createpdfTable(K1);

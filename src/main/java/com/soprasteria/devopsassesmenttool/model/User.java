@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -93,6 +94,53 @@ public class User implements Serializable {
 	}
 
 	private String role;
+
+	
+	private String loginName;
+	private String accountName;
+	@Transient
+	private String Status;
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return Status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		Status = status;
+	}
+
+	/**
+	 * @return the loginName
+	 */
+	public String getLoginName() {
+		return loginName;
+	}
+
+	/**
+	 * @param loginName the loginName to set
+	 */
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	/**
+	 * @return the accountName
+	 */
+	public String getAccountName() {
+		return accountName;
+	}
+
+	/**
+	 * @param accountName the accountName to set
+	 */
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
 
 	public User() {
 

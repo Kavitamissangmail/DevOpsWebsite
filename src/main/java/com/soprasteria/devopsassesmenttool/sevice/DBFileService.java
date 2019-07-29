@@ -121,7 +121,11 @@ public class DBFileService {
 		if (userId == null || user == null)
 			throw new ResourceNotFoundException("User with " + userId + " ID does not exist!");
 
-		return dbFileRepository.findByUserId(userId);
+		Set<DBFile> dbfiles=dbFileRepository.findByUserIdOrderByQIdAsc(userId);
+		dbfiles.forEach(dbfile ->{
+			dbfile.setFileDownloadUri(ServletUriComponentsBuilder.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH).path(dbfile.getFileId() + "").toUriString());
+		});
+		return dbfiles;
 	}
 
 	public Set<DBFile> getFileByQuestionId(Long questionId) {
@@ -179,29 +183,37 @@ public class DBFileService {
 
 				Rating ratingbyqIdandrId = ratingRepository.getRatingsByQuestionQIdAndRatingValue(question.getqId(),
 						answer.getRatingValue());
-				Rating rating = ratingRepository.findByRid(ratingbyqIdandrId.getRid());
+			
 				
-				Rating targetRatingbyqIdandrId = ratingRepository.getRatingsByQuestionQIdAndRatingValue(question.getqId(),
+			Rating targetRatingbyqIdandrId = ratingRepository.getRatingsByQuestionQIdAndRatingValue(question.getqId(),
 						answer.getTargetRatingValue());
+			
+			if (ratingbyqIdandrId != null) {
+				Rating rating = ratingRepository.findByRid(ratingbyqIdandrId.getRid());
+				reportQuestionDetail.setRatingValue(rating.getRatingValue());
+				reportQuestionDetail.setRatingLabel(rating.getRatinglabel());
+			}
+			
+			if (targetRatingbyqIdandrId != null) {
 				Rating targetRating = ratingRepository.findByRid(targetRatingbyqIdandrId.getRid());
-				if (rating != null) {
-					reportQuestionDetail.setRatingValue(rating.getRatingValue());
-					reportQuestionDetail.setRatingLabel(rating.getRatinglabel());
-				}
+				reportQuestionDetail.setTargetRatingValue(targetRating.getRatingValue());
+				reportQuestionDetail.setTargetRatingLabel(targetRating.getRatinglabel());
+			}
 				
-				if (targetRating != null) {
-					reportQuestionDetail.setTargetRatingValue(targetRating.getRatingValue());
-					reportQuestionDetail.setTargetRatingLabel(targetRating.getRatinglabel());
-				}
+			
+				
+		
+		
+
 				reportQuestionDetail.setComment(answer.getComment());
-				reportQuestionDetail.setTargetComment(answer.getTargetComment());
+	reportQuestionDetail.setTargetComment(answer.getTargetComment());
 			}
 			List<ReportFileDetails> reportFiles = new ArrayList<>();
 			Set<DBFile> qFiles = dbFileRepository.findByQId(question.getqId());
 			if (qFiles != null && !qFiles.isEmpty())
 				qFiles.forEach(file -> {
-					reportFiles.add(new ReportFileDetails(file.getId(), file.getFileName(), ServletUriComponentsBuilder
-							.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH).path(file.getId() + "").toUriString()));
+					reportFiles.add(new ReportFileDetails(file.getFileId(), file.getFileName(), ServletUriComponentsBuilder
+							.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH).path(file.getFileId() + "").toUriString()));
 				});
 			reportQuestionDetail.setFiles(reportFiles);
 			reportQuestionDetails.add(reportQuestionDetail);

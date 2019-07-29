@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class DBFile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long fileId;
 
 	private String fileName;
 
@@ -24,12 +25,24 @@ public class DBFile {
 
 	private Long qId;
 
-
 	@Lob
 	private byte[] data;
+	
+	@Transient
+	private String fileDownloadUri;
 
-	public DBFile() {
+	/**
+	 * @return the fileDownloadUri
+	 */
+	public String getFileDownloadUri() {
+		return fileDownloadUri;
+	}
 
+	/**
+	 * @param fileDownloadUri the fileDownloadUri to set
+	 */
+	public void setFileDownloadUri(String fileDownloadUri) {
+		this.fileDownloadUri = fileDownloadUri;
 	}
 
 	public DBFile(String fileName, String fileType, Long userId, Long qId, byte[] data) {
@@ -38,20 +51,26 @@ public class DBFile {
 		this.userId = userId;
 		this.qId = qId;
 		this.data = data;
+
+	}
+
+	public DBFile() {
+	
 	}
 
 	/**
-	 * @return the id
+	 * @return the fileId
 	 */
-	public Long getId() {
-		return id;
+	public Long getFileId() {
+		return fileId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param fileId
+	 *            the fileId to set
 	 */
-	public void setId(Long id) {
-		this.id = id;
+	public void setFileId(Long fileId) {
+		this.fileId = fileId;
 	}
 
 	/**
@@ -62,7 +81,8 @@ public class DBFile {
 	}
 
 	/**
-	 * @param fileName the fileName to set
+	 * @param fileName
+	 *            the fileName to set
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
@@ -76,7 +96,8 @@ public class DBFile {
 	}
 
 	/**
-	 * @param fileType the fileType to set
+	 * @param fileType
+	 *            the fileType to set
 	 */
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
@@ -90,7 +111,8 @@ public class DBFile {
 	}
 
 	/**
-	 * @param userId the userId to set
+	 * @param userId
+	 *            the userId to set
 	 */
 	public void setUserId(Long userId) {
 		this.userId = userId;
@@ -104,7 +126,8 @@ public class DBFile {
 	}
 
 	/**
-	 * @param qId the qId to set
+	 * @param qId
+	 *            the qId to set
 	 */
 	public void setqId(Long qId) {
 		this.qId = qId;
@@ -123,7 +146,8 @@ public class DBFile {
 	}
 
 	/**
-	 * @param data the data to set
+	 * @param data
+	 *            the data to set
 	 */
 	public void setData(byte[] data) {
 		this.data = data;

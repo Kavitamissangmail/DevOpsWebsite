@@ -26,6 +26,8 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 	Set<Rating> getRatingsByQuestionQId(Long qId);
 	
 	Rating getRatingsByQuestionQIdAndRatingValue(Long qId,Long rvalue);
+	
+
 
 	
 

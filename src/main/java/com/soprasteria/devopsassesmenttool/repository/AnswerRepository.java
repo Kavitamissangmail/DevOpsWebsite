@@ -29,5 +29,7 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 	Answer getAnswerByUserUserIdAndQId(Long userId, Long qId);
 
 	List<Answer> getAnswersByUserUserIdAndCId(Long userId, Long cId);
+	
+	 long countByUserUserId(Long userId);
 
 }
