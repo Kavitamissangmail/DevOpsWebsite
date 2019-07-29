@@ -1,0 +1,297 @@
+/***CULTURE rating**/
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Objective of None','DevOps is neither an objective of Customer nor Organization not Team.','2200');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Objective of any one','DevOps is an objective of either one of Customer or Organization or Team.','2200');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Objective of organisation and team','DevOps is an objective of Organization and Team only. DevOps does not feature in list of Customer objectives.','2200');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Objective of Customer and (organisation or team)','DevOps is the objective of Customer and either of Organization or Team.','2200');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Objective of all three','DevOps is the objective of Customer, Organization and Team as well.','2200');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No consensus','Some may know how to implement DevOps, but, there is no mutual agreement between various teams on how to implement.','2201');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','< 25% of consensus exists on the strategy','< 25% of stakeholders have a consensus on the strategy to how to implement DevOps.','2201');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','25 - 50% of consensus exists on the strategy','25-50% of stakeholders have a consensus on the strategy to how to implement DevOps.','2201');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','50 - 75% of consensus exists on the strategy','50-75% of stakeholders have a consensus on the strategy to how to implement DevOps.','2201');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','100% consensus exists','Everyone agrees to the DevOps implementation strategy.','2201');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Both organization and tool do not support','The organizational structure does not support dotted-line reporting to support cross-functional teams having separate line managers, elementary toolset changes (e.g. time booking, attendance recording, etc.) from one team to another.','2202');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Tool support only','Only tools support the implementation of cross-functional teams, e.g. time booking tool takes in to consideration the complexity involved in the booking of time by cross-skills personnel.','2202');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Organization support only','Only the organization/team structure supports the implementation of cross-functional teams as it facilitates multiple reporting (line and dotted-line) of cross-skilled personnel shared across multiple teams','2202');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Both partially support','Organization/team structure and tools has only some features which support the implementation of cross functional teams with few complimentary skills only.','2202');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Both fully support','Organization/team structure and tools fully support the implementation of cross functional teams having complimentary skills.','2202');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No','There does not exist any such culture.','2203');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Are empowered but not self driven and accountable','Teams are empowered by the management but they are not so self-driven and also not held accountable to the work delivered by them.','2203');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Are empowered and self driven but not accountable','Teams are empowered by the management and are also self-driven but management does not held them accountable for the work delivered by them.','2203');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Are self driven but not empowered','Teams are self driven to deliver efficient services but are not empowered by management which diminishes their confidence.','2203');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Are empowered, self driven and accountable','There exists a culture wherein teams are empowered by management, self-driven and also held accountable for their activities. Concept to Grave principle is implemented.','2203');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Not at all','No such environment exists, as teams are only expected to perform BAU activates.','2204');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Innovations are pushed by customer only.','Team participate in innovation activates only if customer ask for it','2204');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Although driven by customer but team actively participate in these initiatives','Apart from customer driving innovation, teams also take interest towards achieving the desired result e.g. customer has initiated an improvement idea but after that it was further developed and matured by the team.','2204');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Apart from customers, innovations are driven internally as well','Organization provides teams with an apt environment for creativity and innovation activities. E.g. conducting ideation sessions, creativity/innovative contests, etc.','2204');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Innovations are part of continual improvement plan','Innovation both internal & external are part of the continual improvement plan. These are tracked even after their implementation to keep the momentum going for the successful innovations and to decide the future course of action for those which have not yielded intended results. A Fail Fast to Learn Fast (Lean Startup principle) environment is provided by the organization.','2204');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Not at all','There does not exists any R&R process.','2205');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','R&R policy exists but not followed religiously across organisation','The R&R process exists but is only implemented across some favored teams/personnel.','2205');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','R&R policy exists, followed religiously but not encouraging','Even though there exists R&R process and is implemented sans any biasness, but the awards are not at all encouraging for teams to feel motivated, e.g. recognition is only limited to a small set of people hence lacks visibility across multiple teams or overall organization, awards with monetary benefits are extremely meager in amount, etc.','2205');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','R&R policy exists, followed religiously but frequency not good','R&R process exists and is followed across all teams but the frequency of these are not at all appropriate which takes away their importance, e.g. there does not exists any monthly or quarterly awards as only annual recognition exists, very high performers in teams are recognized only once in 2 years, etc.','2205');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','R&R system fully in place','Effective R&R process exists which is implemented without any bias on an regular intervals.','2205');
+/***AUTOMATE rating**/
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Not at all','No Tools used, everything is manual','2206');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Tools are not used at every place','Tools are used for code development, build, testing but no tools are used for the packaging, releases, deployment configuration and monitoring','2206');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Tools are mainly standalone as they are not integrated with various processes','Tools are used for code development, build, testing, packaging, releases, deployment configuration and monitoring but these are not integrated. For example tools are used for Requirement capturing and testing but they are not integrated i.e. Test cases are not created from the requirements capturing tool and fed into the Testing tool for testing ','2206');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Only few tools are integrated with other processes tools','Tools used for code development, build and testing are integrated, but these tools are not integrated with packaging, release and deployment tools. For example Subversion Configuration management tool is integrated with the deployment tool Hudson but not integrated with IDE ( for e.g. Eclipse or Visual Studio)','2206');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Teams are using the right tools as they are integrate E2E service','Right set of integrated tools are used for the E2E service thus ensuring integration source control software, integration with IDE, code development, build ,testing,  packaging, releasing, deployment and monitoring','2206');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No focus on Automation','There is no drive/zeal to automate the manual processes as there is no customer mandate. Moreover there are no internal initiatives to improve the service through focusing on Automation by getting rid of errors due to manual interventions. Also, certain situations where there is no automation required as there is no benefit seen in putting extra effort & cost in automating manual interventions.','2207');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Teams too busy with BAU operational tasks ','Although there is customer mandate and team also acknowledges the need for reducing manual interventions but team does not have the bandwidth','2207');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Plan & Strategy in place but team lacks clarity wrt automation prioritization','The High level strategy & plan in place to minimize the manual interventions but there is lack of clarity around what needs to be automated on priority resulting in the maximum benefits to clients','2207');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Automations are implemented but due to lack of continuous governance & high heterogeneity benefits cannot be realized','Although team is working  as per plan towards reducing the manual interventions but there is lack of rigor and governance to ensure the intended benefits are realized over long / mid / short term. Also, due to various external interfaces across the entire value stream of an application, there is a limited scope of automations being delivered alongside their benefit realization.','2207');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Automation is part of Service culture and run as a part of CIP','These initiatives are driven as part of the ongoing CIP programme focusing on removing the errors due to manual interventions thus improving the service. These initiatives are shared with clients and are implemented as per clients priority. The progress on these initiatives are shared on agreed frequency with the client.','2207');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Manual Deployments using the detailed/obsolete instructions','Deployment is fully manual process, whereas detailed release/deployments are provided by the development team to the support team','2208');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Semi-automated deployments using incomprehensible and unmaintainable scripting, are error-prone and time-consuming','Some part of deployment is automated through the use of scripts along with detailed manual steps','2208');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Disintegrated Existing Scripts and inability to extend to Additional Platforms and needs updating whenever there is a new release etc.','Although automated scripts are in place for the complete deployment but these scripts are to be tailored/changed for different environments','2208');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Use of Automated tools for deployments but lacking upgrade and rollback functionality. Changes required to target systems','Automated tools used for the deployment but the rollback and fallback has to be done manually as tools does not provide these functionality','2208');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Fully automated deployment & Rollback - ‘One-click’, totally hands-off, fully automated deployment process i.e. Deploy, upgrade and rollback applications and configuration automatically or at the click of a button ','Fully Automated deployment process across development, Test and production environments. Deploy, upgrade and rollback applications and configuration automatically or at the click of a button.','2208');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Lack of capability (Technical Skills & Infrastructure), Tools access, collaboration among different teams
+Lack of required access/authorization/permissions for Tools/ different environments, Technical skills/competencies, collaboration among different teams','Required access/permissions/authorisation not available for tools/environments & team lacks the technical skills to build the environments. Moreover there is no coordination/collaboration among different teams supporting different environments for e.g. development, Test and production etc.','2209');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Have the required access/authorization/permissions but lack of technical skills/competency /capability','While they have the appropriate access and authorization for tools/environments but due to lack of technical skills developers are not able to easily create environments closely matching to production.','2209');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Have required permissions/technical skills /capability but lot of manual work/efforts & scripting required for syncing the environments','Developers have the required access and authorization along with required technical skills, but due to lots off manual intervention and scripts required for synchronization with production they are not fully able to easily create non-production like environment.','2209');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Have required permissions/technical skills /capability / Tools required for syncing the environments but lack of collaboration among the development, support and Security teams','Due to lack of synergy between teams (developers, support & security), developers are not able to easily create environments closely matching to production even though they have the right technical skills & tools.','2209');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Yes, by the virtue cohesively working of Development, support, testing Security teams and use of automated tools','Developers are able to create production like environment with the right mix of tools, capability and synergy between various teams.','2209');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No such tool exists','There is no such tool capable of generating auto-test cases along with test data whenever there is a change in the requirement.','2210');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Tool exists to partially auto-generate test case only','While a tool exists but it is capable of only partially auto-generate test cases only','2210');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Tool exists to manually generate test case but test data is generated automatically','While a tool exists but it can only auto-generate test data as test case is manually generated','2210');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Tool exists to partially auto-generate test case along with test data','Tool exist to partially auto-generate test case along with test data','2210');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Tool exists to fully auto-generate test case along with test data','Tool exist to fully auto-generate test case along with test data','2210');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Manual 80%
+Automated 20 %
+','One type of testing out of unit testing, system testing, interface testing, performance testing and regression testing is automated','2211');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Manual 60%
+Automated 40 %','Two type of testing out of unit testing, system testing, interface testing, performance testing and regression testing is automated','2211');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Manual 40%
+Automated 60 %
+','Three type of testing out of unit testing, system testing, interface testing, performance testing and regression testing is automated','2211');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Manual 20%
+Automated 80 %
+','Four type of testing out of unit testing, system testing, interface testing, performance testing and regression testing is automated','2211');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Manual 0%
+Automated 100 %
+','All unit testing, system testing, interface testing, performance testing and regression testing are automated','2211');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Teams are not aware of masking sensitive or generating synthetic data','Team not aware of data masking concepts','2212');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Manual procedures exists to perform these activities which consumes lot-off time','Team aware of data masking but it is performed manually','2212');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Tools exist for data masking but data accuracy is compromised','Data accuracy is almost 50%','2212');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Tools exist for data masking and data accuracy is fair','Data accuracy is more than 70%','2212');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Tools exist to generate these quickly with100% accuracy','Data accuracy is 100%','2212');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No focus of Security & vulnerability testing','Teams not aware of Security & vulnerability testing','2213');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Teams know the importance but it is a manual process','No tool exists but ASG checks for vulnerabilities proactively and implements patches manually','2213');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Security testing is partially automated','A process in place where vulnerabilities report is on demand and patches are updated manually.','2213');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Security testing is automated and patches are updated manually','A process in place where vulnerabilities report is received automatically and patches are updated manually.','2213');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Security testing is automated and patches are also updated automatically','A process in place where vulnerabilities report is received automatically and patches are updated automatically.','2213');
+
+
+/***Measure Rating**/
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Processes and tools effectiveness not measured','No mechanism is in place to measure the effectiveness of process/tools','2214');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Effectiveness of processes and tools are measured subjectively,  but no action taken','Measures are subjective and no improvement plans based on finding','2214');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Effectiveness of processes and tools are measured subjectively, documented and improvement actions are taken','Measures are subjective. Improvements are identified and actioned','2214');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Effectiveness of processes and tools are measured quantitatively,  but no action taken','Measures are quantitative and no improvement plans based on finding','2214');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Effectiveness of processes and tools are measured quantitatively, documented and improvement actions are taken','Measures are quantitative. Improvements are identified and actioned','2214');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No measures exists','There are no such measures in place.','2215');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Measures exists but are subjective in nature','Few measures exists but are qualitative in nature, e.g. interactions are rated as Poor, Average or Good. They do not provide any quantitative value to the quality of these interactions.','2215');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Measures exists but not completely','Measures exists but does not cover the complete end-to-end journey from project initiation until service go-live and from Ops to Dev team post service go-live, e.g. service gateway checks exists only during the final hand-over in the transition phase.','2215');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Measures exists and are almost complete','Most of the measures exists which caters to the complete lifecycle, but, lacks maturity as they are not timely reviewed to add more in to them by Dev or Ops teams.','2215');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Measures exists & matures with time through reviews','Comprehensive measures exists and are continuously matured through reviews by Dev, Ops & Quality teams.','2215');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Not at all as there is no Focus, processes, Tools etc. to facilitate this ','Ops monitoring cannot distinguish between critical and recurrent problems due to lack of focus, hence, no process and tools are in place. E.g. Incident Management process/tool is not integrated with Problem Management process/tool.','2216');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Tool exists but such issues are not logged correctly','Due to incorrect logging of incidents / problems under the correct categorization, existing tool is not able to distinguish normal issues with those that are more critical or recurrent in nature.','2216');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Tool exists but categorizes all recurrent problems as critical','Since all repeating problems are categorized as critical (which may not be the actual case as per ITIL definition of Critical / Major Incident and Problem), tool is not able to distinguish between them.','2216');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Only SME / Seniors are able to distinguish between such cases','The monitoring knowledge to distinguish between most critical and recurrent problems lies only with SMEs or Seniors.','2216');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Ops monitoring is able to distinguish between such issues','Effective problem management process is implemented and almost every one in the team can distinguish between Critical and recurrent incidents','2216');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No preventive traps exists to solve problems before user is impacted','Event management process does not exist at all, hence, no traps are set to proactively monitor the service.','2217');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Undefined traps exists','Event traps/alerts have been implemented but are not well defined, e.g. system does not have the intelligence to route a trap to the appropriate team if it is raised.','2217');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Comprehensive traps are in place','Traps have been implemented covering almost all the various aspects of application metrics, however, these are not correlated across multiple applications to solve complex problems before they impact end-user, e.g. recurrent traps being raised across 2 applications which share upstream & downstream data and job run dependencies between them are not correlated and analyzed.','2217');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Along with comprehensive traps, proactive problem management is also performed but only on critical applications & services','Apart from automatically correlating and analyzing multiple application metrics using comprehensive traps, Proactive Problem Management is also performed but only for critical applications & services.','2217');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Along with comprehensive traps, proactive problem management is also performed across entire service','Apart from automatically correlating and analyzing multiple application metrics using comprehensive traps, Proactive Problem Management is also performed for entire service.','2217');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','There is no feedback mechanism from Ops to Business or vice-versa','No feedback taken from Ops to Business or vice-versa. Hence no such mechanism exist to measure the feedback.','2218');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Measures in place but not followed as practice','Feedback is taken from Ops to Business or vice-versa through conference calls/ face to face meeting/emails etc. but these measure are not followed as regularly.','2218');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Measures exists for feedback from Ops to Business only','Measures (conference calls/ face to face meeting/emails etc.) exists for the feedback taken from Ops to Business only.','2218');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Measures exists for feedback from Business to Ops only','Measures (conference calls/ face to face meeting/emails/Client satisfaction surveys etc.)exists for the feedback taken from Business to Ops only.','2218');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Measures exists for feedback from Ops to Business and vice-versa','Measures (Conference calls/Face to face meeting/emails exchanged) exists for the feedback from both Ops to Business and vice-versa, These  are followed as practice. Actions points from these measure are monitored & actioned.','2218');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Development & Operation teams lack business service related knowledge to perform this activity','Due to lack of business service related knowledge, they are not able to monitor business services which link end-user experience and end-to-end transaction.','2219');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Development & Operation teams understand business services but do not have visibility/clarity on end-user experience','They are not able to monitor the business service due to lack of knowledge on end-user experience. They understand the service being provided to the customer, but, do not have enough visibility to comprehend how the end-user is experiencing that service.','2219');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Development & Operation teams understand business and end-user experience but do not understand entire value stream of E2E transactions','While they understand the business and how the service provided by them is being experienced by the user, but, due to lack to understanding of entire value stream (end-to-end) of the transactions they are not able to monitor the services fully. E.g. teams does not understand the flow of a particular data from their application in to those which are supported by other vendors. Product owner does not have the complete view of interfaces through which transactions travel from their product/application to others.','2219');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Development & Operation teams understands both but unable to completely monitor the business service','They understand both the business services linking end-user experience and end-to-end transactions and are also able to monitor the services linking both of these. However, the tools used to monitor the same lacks maturity e.g. outdated tools, monitoring tools do not incorporate any change to a particular end-to-end transaction.','2219');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Yes','Not just that they understand both but also have matured set of tools to allow them to monitor the services linking these two.','2219');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Development & Operation teams lack business service related knowledge to perform this activity','Due to lack of business service related knowledge, they are not able to monitor business services from application to infrastructure & identify RCA & potential impact','2220');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Development & Operation teams understand business services but do not have visibility/clarity on application & infrastructure','Due to lack of in-depth application knowledge, they are neither able to monitor business services fully not identify RCA & potential impact.','2220');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Development & Operation teams understand business services from application & infrastructure but cannot identify RCA','While they have full application and infrastructure knowledge but lacks appropriate Problem Management skills to identify root cause analysis in case of any problem identified, e.g. teams are not aware of 80-20 principle, 5 Why \'s approach to identify root cause.','2220');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Development & Operation teams understand everything but does not have clarity on actual potential impact in case of an issue','Since they do not have full clarity on the potential impact that may be caused in case of an incident, they are not able to completely monitor the business services from application to infrastructure & identify RCA.','2220');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Yes','Not just that they understand all the aspect but also have matured set of tools to allow them to monitor the services linking these two.','2220');
+
+/***SHARE Rating**/
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No focus on sharing - Separate teams working in Silos','Teams involved in Dev and Ops do not share any information between them as there is no integration between them. Both teams work in silos.','2221');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Releases are planned separately without any visibility into each other releases. Information is shared informally','Releases are planned without taking in to consideration plan of other releases. For e.g. two applications, having interfaces between themselves, have releases planned over the same weekend but team of both applications are unaware of their each other release plan. Information shared between Dev and Ops is through informal discussions. ','2221');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Information is shared only if there is a problem after a release','Dev and Ops teams share information between themselves only if there is a major issue post deployment of a release to discuss mitigation actions.','2221');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Information is shared in case of major/ big releases only ','Dev and Ops teams share information between themselves only in case of major releases, e.g. introducing new module, product version upgrade.','2221');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Such sessions are conducted formally','Information sharing between Dev and Ops happens for all minor/major release through well conducted regular meetings, MOM taken, monitored and actioned.','2221');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Not at all - separate dedicated teams','Dev and Ops teams are totally separate dedicated teams with no involvement with each other. There is no rotation between them.','2222');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Rotation happens but not many in team are motivated to move from Dev to Ops or vice-versa','While the management encourages personnel to move from Dev to Ops or vice-versa, however, due to lack of some team members motivation rotation process cannot be implemented successfully.','2222');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Rotation is not effective due to capability gaps','Rotation is encouraged, even are also ready for rotation but sometime there is gap in skills & competencies which acts as a barrier in rotation','2222');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Due to hierarchical reasons, rotation is not fully effective','Although the Shared team is doing development and support but person belonging to different teams are pulled by their respective managers for some urgent tasks. They are more aligned/accountable to their respective teams, as result of this sharing is not done effectively','2222');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Shared team doing Development and Support','There exists a central team with special developed skills that can be utilized in both Dev and Ops areas on rotation basis, e.g. key personnel from 2LS team members are also trained & experienced in 3LS activities hence are utilized in both Ops and Dev areas on need basis.  Similarly 3LS members with indepth application knowledge doing deep dive on RCA.','2222');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Historical tickets are not analysed by both','There does not exist any process to analyze historical issues or lessons learnt by either of Dev or Ops teams.','2223');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Historical tickets are only analysed by Ops','Only Ops teams analyze historical incidents/problems/escalations to perform problem management activities. The information is not shared with Dev team.','2223');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Dev and Ops analyze historical tickets independently  ','Dev and Ops team work in silos to analyze the same historical data and do no share the outcome of their analysis with each other','2223');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Dev and Ops together analyze historical tickets only for business critical applications ','Both Dev and Ops analyze historical issues but only for business critical applications.','2223');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Dev and Ops both analyze historical tickets','Both Dev and Ops analyze historical issues across all the applications supported.','2223');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Not at all -no monitoring tools in place, all monitoring done by Ops team manually no stats analysed','Ops team has to manually perform monitoring (e.g. someone manual watching the screen while a job is being run, etc.) as no tools exists. Due to manual monitoring no stats are present for analysis purpose.','2224');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Monitoring Tools in place but the stats are not shared with Dev team and monitoring stats analysed by the Ops only','Robust monitoring tools (e.g. event management traps) are in place and are used by Ops team only for systems health check purposes. As these check the operations of an application/service, Ops team do not share any statistics / analysis with Dev.','2224');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Monitoring Tools in place, stats are analysed by Ops thoroughly & stats are shared with Dev team but no efforts are made by Dev to analyze them','While Ops team not only make use of monitoring tools for analysis purpose, they also share the data with Dev team. However, Dev team does not make any effort to perform analysis of this data.','2224');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Monitoring stats are analysed separately by Dev & Ops teams and no sharing of observations/findings among them','Both Dev and Ops works in silos to analyze the stats produced from monitoring tools. There is not sharing of this analysis between themselves.','2224');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Dev & Ops team works collaboratively in the analysis of monitoring stats & works towards preventive maintenance','Dev and Ops both together analyze information produced by these monitoring tools to come up with proactive solutions for better service delivery, e.g. Dev and Ops analyzing the higher memory utilization of a particular application over past several months and together identifying the root cause behind the same.','2224');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','No mechanism exists to capture any change on systems performance','There does not exist any process / mechanism which highlights the changes made in to the system. Only those making the change are aware of the same as no configuration management process exists.','2225');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Teams can only identify the change on systems performance but not the reasons behind it','Tools exists which notifies the teams in case of any change in the system performance (e.g. event trap getting raised whenever CPU utilization crosses 85%, event trap getting raised in case of critical job run failures). However, teams are not able to identify the reasons behind the change in system performance for various possible reasons, e.g. teams do not posses required skill set to do technical analysis, problem management process is not implemented with rigor.','2225');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Teams can only manually identify the reasons behind such changes','There are no tools in place which assists the team to identify reasons behind the change in system performance. Teams have to manually identify the possible reasons (e.g. analysing the log files, tool does not provide any trending graphs of memory utilization over past several months).','2225');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Mechanism exists to identify reasons behind such changes but are not quick enough','Tools exists which identified the reason behind any change in the system performance, however, they are not matured enough as they take very long time to process the information for analysis purpose, e.g. legacy tool being used which was earlier fit to identify reasons for a system built more than a decade old.','2225');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Effective mechanism exists for teams to quickly identify such reasons','With the help of effective tools, teams are able to quickly identify the reason as soon as there is any change in system performance.','2225');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Not at all - separate dedicated teams working in Silos','Dedicated teams for the development and operations working in silos. No information shared between them, hence no feedback mechanism exists.','2226');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','No feedback is taken between teams for sharing important information','Even though Dev and Ops teams share important information i.e. before & after release, bugs during testing, post go-live incidents, etc. No feedback is taken related to the quality, reliability and aptness of information being shared.','2226');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Feedback loops exists but are not periodic in nature','Feedback process exists for information being shared between Dev and Ops. However it is not taken on regular basis for e.g. feedback taken if time permits, type of project/service, moreover no single owner of feedback process.  ','2226');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Periodic feedback loops exists between Dev and Ops team but not for all important information shared','Even though feedback is shared between Dev and Ops on regular basis, however, it is not continuous in nature.  As it is not taking place for all important information shared e.g. in an event of a Major Incident (MI) which requires information to flow between Dev and Ops teams does not happen, for a major version release date planning Dev team does not take in to account support (Ops) activities and feedback is not taken there as well, etc.','2226');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Periodic feedback loops exists between Dev and Ops team during all stages','Seamless flow of information at each and every stage from Dev to Ops and vice-versa.  The formal feedback mechanism for e.g. Service Gateway activities, Exit gates review Acceptance into Service and Problem management between Development & Ops team. Matured periodic exchange of feedback between the teams leads for better service delivery. ','2226');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('1','Stringent Compliance no Sharing allowed due to DPA, Information Security act etc.','Sharing is not allowed at all','2227');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('2','Processes can be shared but tools and people can not be shared','Only process sharing is allowed','2227');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('3','Processes & tools can be shared but people can not be shared','Processes, tools can be shared. People can not shared ','2227');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('4','Processes, tools & people can be shared within account','Processes, tools & people can be shared but not across accounts','2227');
+INSERT INTO rating(rating_value,ratinglabel,rating_desc,question_id)
+VALUES ('5','Processes, tools & people can be shared across accounts','No restriction on sharing of process, tool & people across accounts','2227');
