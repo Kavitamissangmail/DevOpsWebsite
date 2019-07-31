@@ -11,6 +11,8 @@ public class ApiResponse {
 
 	private Long status;
 	private String userrName;
+	private String loginName;
+	private String accountName;
 	private String token;
 	private long userId;
 	private String message;
@@ -29,6 +31,34 @@ public class ApiResponse {
 	 */
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the loginName
+	 */
+	public String getLoginName() {
+		return loginName;
+	}
+
+	/**
+	 * @param loginName the loginName to set
+	 */
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	/**
+	 * @return the accountName
+	 */
+	public String getAccountName() {
+		return accountName;
+	}
+
+	/**
+	 * @param accountName the accountName to set
+	 */
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 
 	/**
@@ -66,14 +96,17 @@ public class ApiResponse {
 		return userId;
 	}
 
-	public ApiResponse(Long status, String userrName, String token, long userId,String message,String role) {
+	public ApiResponse(Long status, String userrName, String loginName ,String accountName, String token, long userId,String message,String role ) {
 
 		this.status = status;
 		this.userrName = userrName;
+		this.loginName =loginName;
+		this.accountName=accountName;
 		this.token = token;
 		this.userId = userId;
 		this.message = message;
 		this.role=role;
+		
 	}
 
 	/**

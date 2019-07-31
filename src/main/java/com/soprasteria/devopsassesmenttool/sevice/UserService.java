@@ -114,7 +114,7 @@ public class UserService {
 	public ApiResponse login(LoginDto loginDto) {
 		User user = userRepository.findByUsername(loginDto.getUsername());
 		if (user == null) {
-			return new ApiResponse(200L, loginDto.getUsername(), "", 0L, "success", "");
+			return new ApiResponse(200L, loginDto.getUsername(), "", "", "", 0L, "success", "");
 
 		}
 		if (!user.getPassword().equals(loginDto.getPassword())) {
@@ -129,7 +129,7 @@ public class UserService {
 		ut.setRole(user.getRole());
 
 		userTokenRepository.save(ut);
-		return new ApiResponse(200L, ut.getUsername(), ut.getToken(), ut.getUserId(), "success", ut.getRole());
+		return new ApiResponse(200L, ut.getUsername(), user.getAccountName(), user.getLoginName(),ut.getToken(), ut.getUserId(), "success", ut.getRole());
 
 	}
 
@@ -172,7 +172,7 @@ public class UserService {
 
 		userTokenRepository.deleteByusername(user);
 
-		return new ApiResponse(200L, "", "", userId, "deleted", "");
+		return new ApiResponse(200L, "", "", user, user, userId, "deleted", "");
 
 	}
 
