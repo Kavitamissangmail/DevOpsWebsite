@@ -129,7 +129,7 @@ public class UserService {
 		ut.setRole(user.getRole());
 
 		userTokenRepository.save(ut);
-		return new ApiResponse(200L, ut.getUsername(), user.getAccountName(), user.getLoginName(),ut.getToken(), ut.getUserId(), "success", ut.getRole());
+		return new ApiResponse(200L, ut.getUsername(),  user.getLoginName(),user.getAccountName(),ut.getToken(), ut.getUserId(), "success", ut.getRole());
 
 	}
 
