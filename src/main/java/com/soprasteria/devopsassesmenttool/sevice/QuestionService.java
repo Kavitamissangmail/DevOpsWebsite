@@ -79,6 +79,7 @@ public class QuestionService {
 		question1.setQuestionlabel(questionRequest.getQuestionlabel());
 		question1.setQuestionDesc(questionRequest.getQuestionDesc());
 		question1.setqId(questionRequest.getqId());
+		
 
 		return questionRepository.save(question1);
 	}

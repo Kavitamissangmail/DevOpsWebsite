@@ -4,13 +4,13 @@
 package com.soprasteria.devopsassesmenttool.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.devopsassesmenttool.model.AccountLabel;
-import com.soprasteria.devopsassesmenttool.model.Answer;
-import com.soprasteria.devopsassesmenttool.model.Category;
 import com.soprasteria.devopsassesmenttool.sevice.AccountlabelService;
 
 /**
@@ -59,7 +57,7 @@ public class AccountLabelController {
 	
 	@Transactional
 	@RequestMapping(value = "/accountLabel/{Id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteAnswerByAnswerId(@PathVariable(value = "Id") Long Id) {
+	public ResponseEntity<Object> deleteAccountLabelById(@PathVariable(value = "Id") Long Id) {
 		return accountLabelService.deleteAccountLabelById(Id);
 	}
 }

@@ -4,9 +4,8 @@
 package com.soprasteria.devopsassesmenttool.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -15,7 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  *
  */
 
-@Component
+@Configuration
+@EnableWebMvc
 public class DevOpsInterceptorAppConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	DevOpsServiceInterceptor devOpsServiceInterceptor;
@@ -24,12 +24,4 @@ public class DevOpsInterceptorAppConfig extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(devOpsServiceInterceptor).excludePathPatterns("/devops/login/**", "/devops/logout/**");
 	}
-	
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET","POST","PUT","DELETE","OPTIONS");
-	}
-	
-
-
 }

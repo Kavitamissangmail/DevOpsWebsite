@@ -7,17 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.soprasteria.devopsassesmenttool.model.UserToken;
 import com.soprasteria.devopsassesmenttool.repository.UserTokenRepository;
-import com.soprasteria.devopsassesmenttool.util.ApiResponse;
-import com.soprasteria.devopsassesmenttool.util.CustomErrorType;
-import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 
 /**
  * @author dbkumar
@@ -33,25 +28,20 @@ public class DevOpsServiceInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		request.getHeader("Authorization");
+
+		UserToken ut = userTokenRepository.findByToken(request.getHeader("token"));
+		if (ut != null ) {
+			return true;
+		} else {
+			//response.getWriter().write("UNAUTHORIZED");
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		
+			return true;
+
+		}
 
 		
-/*		if (request.getHeader("token") != null) {
-			UserToken ut = userTokenRepository.findByToken(request.getHeader("token"));
-			if (ut != null) {
-				return true;
-			}
-
-			else {
-				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.getWriter().write("UNAUTHORIZED");
-			}
-		} else {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			response.getWriter().write("UNAUTHORIZED");
-
-		}*/
-
-		return true;
 	}
 
 	@Override

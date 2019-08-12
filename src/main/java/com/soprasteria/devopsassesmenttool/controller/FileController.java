@@ -9,6 +9,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +29,6 @@ import com.soprasteria.devopsassesmenttool.sevice.UserService;
 import com.soprasteria.devopsassesmenttool.util.ResourceNotFoundException;
 import com.soprasteria.devopsassesmenttool.util.UploadFileResponse;
 import com.soprasteria.devopsassesmenttool.util.UserReportDetails;
-import com.soprasteria.devopsassesmenttool.util.UserReportDetails.ReportFileDetails;
 
 @RestController
 @RequestMapping("/devops")

@@ -114,7 +114,7 @@ public class UserService {
 	public ApiResponse login(LoginDto loginDto) {
 		User user = userRepository.findByUsername(loginDto.getUsername());
 		if (user == null) {
-			return new ApiResponse(200L, loginDto.getUsername(), "", 0L, "success", "");
+			return new ApiResponse(200L, loginDto.getUsername(), "", "", "", 0L, "success", "");
 
 		}
 		if (!user.getPassword().equals(loginDto.getPassword())) {
@@ -129,7 +129,7 @@ public class UserService {
 		ut.setRole(user.getRole());
 
 		userTokenRepository.save(ut);
-		return new ApiResponse(200L, ut.getUsername(), ut.getToken(), ut.getUserId(), "success", ut.getRole());
+		return new ApiResponse(200L, ut.getUsername(),  user.getLoginName(),user.getAccountName(),ut.getToken(), ut.getUserId(), "success", ut.getRole());
 
 	}
 
@@ -169,10 +169,14 @@ public class UserService {
 		User user1 = userRepository.findByUsername(user);
 
 		long userId = user1.getUserId();
+		String uname = user1.getUsername();
+		String lname = user1.getLoginName();
+		String aname = user1.getAccountName();
+		String urole = user1.getRole();
 
 		userTokenRepository.deleteByusername(user);
 
-		return new ApiResponse(200L, "", "", userId, "deleted", "");
+		return new ApiResponse(200L, uname, lname, aname, "", userId, "User has been logged out",urole );
 
 	}
 
