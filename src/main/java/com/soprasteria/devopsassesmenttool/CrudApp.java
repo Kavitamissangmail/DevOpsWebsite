@@ -12,7 +12,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @SpringBootApplication
-@CrossOrigin
 public class CrudApp extends SpringBootServletInitializer {
 
 	@Override
