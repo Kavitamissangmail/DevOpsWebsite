@@ -137,6 +137,8 @@ public class PDFUserReportCreation {
 								+ labels.get(i).getAcccolname().substring(1);
 
 						String cmdname = "get" + mdname;
+						
+						System.out.println("cmdname"+ACCOUNT_DETAILS_HEADER+cmdname);
 
 						pdfUtils.addElementToCellHeading(userAccountInfoTable, accountLabelRespository
 								.findByacccolname(labels.get(i).getAcccolname()).getAccountlabel()+":");
@@ -171,6 +173,7 @@ public class PDFUserReportCreation {
 								+ labels.get(i).getAcccolname().substring(1);
 
 						String cmdname = "get" + mdname;
+						System.out.println("cmdname  "+ACCOUNT_SCOPE_HEADER+cmdname);
 
 						pdfUtils.addElementToCellHeading(userAccountScopeTable, accountLabelRespository
 								.findByacccolname(labels.get(i).getAcccolname()).getAccountlabel()+":");

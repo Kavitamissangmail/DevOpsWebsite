@@ -169,10 +169,14 @@ public class UserService {
 		User user1 = userRepository.findByUsername(user);
 
 		long userId = user1.getUserId();
+		String uname = user1.getUsername();
+		String lname = user1.getLoginName();
+		String aname = user1.getAccountName();
+		String urole = user1.getRole();
 
 		userTokenRepository.deleteByusername(user);
 
-		return new ApiResponse(200L, "", "", user, user, userId, "deleted", "");
+		return new ApiResponse(200L, uname, lname, aname, "", userId, "User has been logged out",urole );
 
 	}
 

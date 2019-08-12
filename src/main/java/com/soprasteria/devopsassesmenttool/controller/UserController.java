@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class UserController {
 	public List<User> getUsers() {
 		return userService.getAllUsers();
 	}
-	
+
 	@RequestMapping(value = "/getUserByUserId/{userId}", method = RequestMethod.GET)
 	public User getUserByUserId(@PathVariable(value = "userId") Long userId) {
 		return userService.getUserByUserId(userId);

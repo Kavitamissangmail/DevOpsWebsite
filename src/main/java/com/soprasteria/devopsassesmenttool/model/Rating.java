@@ -37,7 +37,7 @@ public class Rating implements Serializable {
 	private Long rid;
 
 	private Long ratingValue;
-	@Column(length=1000)
+	@Column(length=1000) 
 	private String ratinglabel;
 
 	
