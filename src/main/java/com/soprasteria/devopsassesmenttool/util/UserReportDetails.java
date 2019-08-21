@@ -91,6 +91,7 @@ public class UserReportDetails {
 
 	public static class ReportQuestionDetails {
 		private Long questionId;
+		private String categoryName;
 		private String questionLabel;
 		private Long ratingValue;
 		private Long targetRatingValue;
@@ -107,9 +108,10 @@ public class UserReportDetails {
 
 		}
 
-		public ReportQuestionDetails(Long questionId, String questionLabel, Long ratingValue, String ratingLabel,Long targetRatingValue,String targetComment,
+		public ReportQuestionDetails(Long questionId, String categoryName,String questionLabel, Long ratingValue, String ratingLabel,Long targetRatingValue,String targetComment,
 				String comment, List<ReportFileDetails> files) {
 			this.questionId = questionId;
+			this.categoryName= categoryName;
 			this.questionLabel = questionLabel;
 			this.ratingValue = ratingValue;
 			this.ratingLabel = ratingLabel;
@@ -117,6 +119,22 @@ public class UserReportDetails {
 			this.targetComment=targetComment;
 			this.targetRatingValue=targetRatingValue;
 			this.files = files;
+		}
+
+
+
+		/**
+		 * @return the categoryName
+		 */
+		public String getCategoryName() {
+			return categoryName;
+		}
+
+		/**
+		 * @param categoryName the categoryName to set
+		 */
+		public void setCategoryName(String categoryName) {
+			this.categoryName = categoryName;
 		}
 
 		/**

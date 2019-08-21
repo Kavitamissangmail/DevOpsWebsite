@@ -32,6 +32,8 @@ public class CategoryService {
 		return categoryRepository.findByCId(categoryId);
 
 	}
+	
+	
 
 	public Category createCategory(Category category) {
 		return categoryRepository.save(category);

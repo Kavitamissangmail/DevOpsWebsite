@@ -25,3 +25,4 @@ public class DevOpsInterceptorAppConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(devOpsServiceInterceptor).excludePathPatterns("/devops/login/**", "/devops/logout/**");
 	}
 }
+

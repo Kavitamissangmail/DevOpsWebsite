@@ -207,7 +207,7 @@ public class PDFUserReportCreation {
 		pdfUtils.addElementToCellHeading(userReportTable, "Comment");
 		pdfUtils.addElementToCellHeading(userReportTable, "Target Rating");
 		pdfUtils.addElementToCellHeading(userReportTable, "Target Rating Desc");
-		pdfUtils.addElementToCellHeading(userReportTable, "Taregt Comment");
+		pdfUtils.addElementToCellHeading(userReportTable, "Target Comment");
 		pdfUtils.addElementToCellHeading(userReportTable, "Files");
 
 		if (!userReportDetails.getQuestions().isEmpty()) {

@@ -177,6 +177,7 @@ public class DBFileService {
 		questions.forEach(question -> {
 			ReportQuestionDetails reportQuestionDetail = new ReportQuestionDetails();
 			reportQuestionDetail.setQuestionId(question.getqId());
+			reportQuestionDetail.setCategoryName(question.getCategory().getCategoryName());
 			reportQuestionDetail.setQuestionLabel(question.getQuestionlabel());
 			Answer answer = ansRepository.getAnswerByUserUserIdAndQId(user.getUserId(), question.getqId());
 			if (answer != null) {
@@ -209,7 +210,8 @@ public class DBFileService {
 	reportQuestionDetail.setTargetComment(answer.getTargetComment());
 			}
 			List<ReportFileDetails> reportFiles = new ArrayList<>();
-			Set<DBFile> qFiles = dbFileRepository.findByQId(question.getqId());
+			Set<DBFile> qFiles = dbFileRepository.findByQIdAndUserId(question.getqId(), user.getUserId());
+			
 			if (qFiles != null && !qFiles.isEmpty())
 				qFiles.forEach(file -> {
 					reportFiles.add(new ReportFileDetails(file.getFileId(), file.getFileName(), ServletUriComponentsBuilder
