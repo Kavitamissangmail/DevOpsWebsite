@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.devopsassesmenttool.model.Answer;
@@ -59,8 +60,8 @@ public class AnswerController {
 	}
 
 	@RequestMapping(value = "/getAnswers/user/{userId}", method = RequestMethod.GET)
-	public Set<Answer> getAnswerByUserId(@PathVariable(value = "userId") Long userId) {
-		return answerService.getAnswerByUserId(userId);
+	public Set<Answer> getAnswersByUserUserIdAndAssessmentType(@PathVariable(value = "userId") Long userId,@RequestParam(defaultValue="DEVOPS") String type) {
+		return answerService.getAnswersByUserUserIdAndAssessmentType(userId,type);
 	}
 
 	@RequestMapping(value = "/answer/{answerId}", method = RequestMethod.GET)
@@ -69,8 +70,8 @@ public class AnswerController {
 	}
 	
 	@RequestMapping(value = "/getCategorizedAnswers/user/{userId}", method = RequestMethod.GET)
-	public List<CategorizedAnswers>  getCategorizedAnswers(@PathVariable(value = "userId") Long userId) {
-		return answerService.getCategorizedAnswers(userId);
+	public List<CategorizedAnswers>  getCategorizedAnswers(@PathVariable(value = "userId") Long userId, @RequestParam(defaultValue="DEVOPS") String type) {
+		return answerService.getCategorizedAnswers(userId,type);
 	}
 	
 	

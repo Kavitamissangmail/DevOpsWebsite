@@ -21,19 +21,17 @@ public class CategoryService {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public List<Category> getCategories() {
-		return categoryRepository.findAll();
+	public List<Category> getCategories(String type) {
+		return categoryRepository.getCategoryByAssessmentType(type);
 	}
 
-	public Optional<Category> getCategoryById(Long categoryId) {
+	public Category getCategoryById(Long categoryId) {
 		if (!categoryRepository.existsByCId(categoryId)) {
 			throw new ResourceNotFoundException("Author with id " + categoryId + " not found");
 		}
 		return categoryRepository.findByCId(categoryId);
 
 	}
-	
-	
 
 	public Category createCategory(Category category) {
 		return categoryRepository.save(category);
@@ -44,16 +42,16 @@ public class CategoryService {
 		if (!categoryRepository.existsByCId(categoryId)) {
 			throw new ResourceNotFoundException("category with id " + categoryId + " not found");
 		}
-		Optional<Category> category = categoryRepository.findByCId(categoryId);
+		Category category = categoryRepository.findByCId(categoryId);
 
-		if (!category.isPresent()) {
+		if (category != null) {
 			throw new ResourceNotFoundException("category with id " + categoryId + " not found");
 		}
 
-		Category category1 = category.get();
-		category1.setcId(categoryRequest.getcId());
-		category1.setCategoryName(categoryRequest.getCategoryName());
-		return categoryRepository.save(category1);
+		category.setcId(categoryRequest.getcId());
+		category.setCategoryName(categoryRequest.getCategoryName());
+		category.setAssessmentType(categoryRequest.getAssessmentType());
+		return categoryRepository.save(category);
 
 	}
 
@@ -66,6 +64,6 @@ public class CategoryService {
 
 		return ResponseEntity.ok().build();
 
-	} 
+	}
 
 }

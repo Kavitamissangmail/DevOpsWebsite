@@ -1,5 +1,7 @@
 package com.soprasteria.devopsassesmenttool.repository;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +19,10 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 	void deleteByQId(Long questionId);
 
 	Set<Question> getQuestionsByCategoryCId(Long categoryId);
+	
+	List<Question> getQuestionsByAssessmentType(String type);
+	
+	 long countByAssessmentType(String type);
 	
 
 	

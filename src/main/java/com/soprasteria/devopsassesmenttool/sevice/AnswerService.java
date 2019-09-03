@@ -94,6 +94,7 @@ public class AnswerService {
 		answer1.setTargetRatingValue(answerRequest.getTargetRatingValue());
 		answer1.setTargetComment(answerRequest.getTargetComment());
 		answer.setcId(question.getCategory().getcId());
+		answer.setAssessmentType(answerRequest.getAssessmentType());
 
 		return answerRepository.save(answer1);
 	}
@@ -111,18 +112,25 @@ public class AnswerService {
 	public Set<Answer> getAnswerByUserId(Long userId) {
 		return answerRepository.getAnswersByUserUserId(userId);
 	}
+	
+	
+	public Set<Answer> getAnswersByUserUserIdAndAssessmentType(Long userId,String type) {
+		return answerRepository.getAnswersByUserUserIdAndAssessmentType(userId,type);
+	}
+	
+	
 
-	public List<CategorizedAnswers> getCategorizedAnswers(Long userId) {
+	public List<CategorizedAnswers> getCategorizedAnswers(Long userId, String type) {
 		List<CategorizedAnswers> categorizedAnswers = new ArrayList<>();
 
-		List<Category> categories = catRepository.findAll();
+		List<Category> categories = catRepository.getCategoryByAssessmentType(type);
 
 		if (!categories.isEmpty()) {
 			categories.forEach(cat -> {
 				CategorizedAnswers categorizedAnswer = new CategorizedAnswers();
 				categorizedAnswer.setcId(cat.getcId());
 				categorizedAnswer.setcName(cat.getCategoryName());
-				categorizedAnswer.setAnswers(answerRepository.getAnswersByUserUserIdAndCId(userId, cat.getcId()));
+				categorizedAnswer.setAnswers(answerRepository.getAnswersByUserUserIdAndCIdAndAssessmentType(userId, cat.getcId(),type));
 				categorizedAnswers.add(categorizedAnswer);
 			});
 
