@@ -99,19 +99,37 @@ public class User implements Serializable {
 	private String loginName;
 	private String accountName;
 	@Transient
-	private String Status;
+	private String DevopsStatus;
+	@Transient
+	private String AgileStatus;
+
+
 	/**
-	 * @return the status
+	 * @return the devopsStatus
 	 */
-	public String getStatus() {
-		return Status;
+	public String getDevopsStatus() {
+		return DevopsStatus;
 	}
 
 	/**
-	 * @param status the status to set
+	 * @param devopsStatus the devopsStatus to set
 	 */
-	public void setStatus(String status) {
-		Status = status;
+	public void setDevopsStatus(String devopsStatus) {
+		DevopsStatus = devopsStatus;
+	}
+
+	/**
+	 * @return the agileStatus
+	 */
+	public String getAgileStatus() {
+		return AgileStatus;
+	}
+
+	/**
+	 * @param agileStatus the agileStatus to set
+	 */
+	public void setAgileStatus(String agileStatus) {
+		AgileStatus = agileStatus;
 	}
 
 	/**

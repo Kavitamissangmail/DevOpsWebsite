@@ -79,7 +79,7 @@ public class DBFileService {
 
 	public static final String DOWNLOAD_FILE_PATH = "/devops/downloadFile/";
 
-	public DBFile storeFile(MultipartFile file, Long userId, Long qId) {
+	public DBFile storeFile(MultipartFile file, Long userId, Long qId, String type) {
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -89,7 +89,7 @@ public class DBFileService {
 				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
 			}
 
-			DBFile dbFile = new DBFile(fileName, file.getContentType(), userId, qId, file.getBytes());
+			DBFile dbFile = new DBFile(fileName, file.getContentType(), userId, qId, file.getBytes(), type);
 
 			return dbFileRepository.save(dbFile);
 		} catch (IOException ex) {
@@ -116,14 +116,15 @@ public class DBFileService {
 		return dbFileRepository.findAll();
 	}
 
-	public Set<DBFile> getFileByUserId(Long userId) {
+	public Set<DBFile> getFileByUserId(Long userId, String type) {
 		User user = userRepository.findOne(userId);
 		if (userId == null || user == null)
 			throw new ResourceNotFoundException("User with " + userId + " ID does not exist!");
 
-		Set<DBFile> dbfiles=dbFileRepository.findByUserIdOrderByQIdAsc(userId);
-		dbfiles.forEach(dbfile ->{
-			dbfile.setFileDownloadUri(ServletUriComponentsBuilder.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH).path(dbfile.getFileId() + "").toUriString());
+		Set<DBFile> dbfiles = dbFileRepository.findByUserIdAndAssessmentTypeOrderByQIdAsc(userId,type);
+		dbfiles.forEach(dbfile -> {
+			dbfile.setFileDownloadUri(ServletUriComponentsBuilder.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH)
+					.path(dbfile.getFileId() + "").toUriString());
 		});
 		return dbfiles;
 	}
@@ -136,86 +137,82 @@ public class DBFileService {
 		return dbFileRepository.findByQId(questionId);
 	}
 
-	public UserReportDetails getUserReportDetails(User user)  {
+	public UserReportDetails getUserReportDetails(User user, String type) {
 		UserReportDetails userRepDetails = new UserReportDetails();
 		Account account = accountRepository.findByUserUserId(user.getUserId());
 
 		List<AccountLabel> labels = accountLabelRespository.findAll();
 		List<AccountDetails> accountDetails = new ArrayList<>();
-		 try{
-			    Class c = Class.forName("com.soprasteria.devopsassesmenttool.model.Account");
-	
-				Object obj = c.newInstance();
-				obj=accountRepository.findByUserUserId(user.getUserId());
-				if (account != null) {
-			
-					for(int i=0;i<labels.size();i++ ){
-						
-						
-						AccountDetails accountDetail1 = new AccountDetails();
-						String mdname=labels.get(i).getAcccolname().substring(0, 1).toUpperCase()+labels.get(i).getAcccolname().substring(1);	
-						
-						String cmdname="get"+mdname;
-						accountDetail1.setAcccolnamedetails(String.valueOf(c.getMethod(cmdname).invoke(obj)));
+		try {
+			Class c = Class.forName("com.soprasteria.devopsassesmenttool.model.Account");
 
+			Object obj = c.newInstance();
+			obj = accountRepository.findByUserUserId(user.getUserId());
+			if (account != null) {
 
-				        accountDetail1.setAcccolname(labels.get(i).getAcccolname());
-						accountDetail1.setAcclabel(labels.get(i).getAccountlabel());
-				        accountDetails.add(accountDetail1);
-					
-					}
-					userRepDetails.setAccountdetails(accountDetails);
-				
+				for (int i = 0; i < labels.size(); i++) {
+
+					AccountDetails accountDetail1 = new AccountDetails();
+					String mdname = labels.get(i).getAcccolname().substring(0, 1).toUpperCase()
+							+ labels.get(i).getAcccolname().substring(1);
+
+					String cmdname = "get" + mdname;
+					accountDetail1.setAcccolnamedetails(String.valueOf(c.getMethod(cmdname).invoke(obj)));
+
+					accountDetail1.setAcccolname(labels.get(i).getAcccolname());
+					accountDetail1.setAcclabel(labels.get(i).getAccountlabel());
+					accountDetails.add(accountDetail1);
+
 				}
-		 }catch (Exception e){
-			  e.printStackTrace();
-		 }
+				userRepDetails.setAccountdetails(accountDetails);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		userRepDetails.setUserId(user.getUserId());
 		userRepDetails.setUserName(user.getUsername());
 		List<ReportQuestionDetails> reportQuestionDetails = new ArrayList<>();
-		List<Question> questions = questionRepository.findAll();
+		List<Question> questions = questionRepository.getQuestionsByAssessmentType(type);
 		questions.forEach(question -> {
 			ReportQuestionDetails reportQuestionDetail = new ReportQuestionDetails();
 			reportQuestionDetail.setQuestionId(question.getqId());
 			reportQuestionDetail.setCategoryName(question.getCategory().getCategoryName());
 			reportQuestionDetail.setQuestionLabel(question.getQuestionlabel());
-			Answer answer = ansRepository.getAnswerByUserUserIdAndQId(user.getUserId(), question.getqId());
+			Answer answer = ansRepository.getAnswerByUserUserIdAndQIdAndAssessmentType(user.getUserId(), question.getqId(),
+					question.getAssessmentType());
 			if (answer != null) {
 
 				Rating ratingbyqIdandrId = ratingRepository.getRatingsByQuestionQIdAndRatingValue(question.getqId(),
 						answer.getRatingValue());
-			
-				
-			Rating targetRatingbyqIdandrId = ratingRepository.getRatingsByQuestionQIdAndRatingValue(question.getqId(),
-						answer.getTargetRatingValue());
-			
-			if (ratingbyqIdandrId != null) {
-				Rating rating = ratingRepository.findByRid(ratingbyqIdandrId.getRid());
-				reportQuestionDetail.setRatingValue(rating.getRatingValue());
-				reportQuestionDetail.setRatingLabel(rating.getRatinglabel());
-			}
-			
-			if (targetRatingbyqIdandrId != null) {
-				Rating targetRating = ratingRepository.findByRid(targetRatingbyqIdandrId.getRid());
-				reportQuestionDetail.setTargetRatingValue(targetRating.getRatingValue());
-				reportQuestionDetail.setTargetRatingLabel(targetRating.getRatinglabel());
-			}
-				
-			
-				
-		
-		
+
+				Rating targetRatingbyqIdandrId = ratingRepository
+						.getRatingsByQuestionQIdAndRatingValue(question.getqId(), answer.getTargetRatingValue());
+
+				if (ratingbyqIdandrId != null) {
+					Rating rating = ratingRepository.findByRid(ratingbyqIdandrId.getRid());
+					reportQuestionDetail.setRatingValue(rating.getRatingValue());
+					reportQuestionDetail.setRatingLabel(rating.getRatinglabel());
+				}
+
+				if (targetRatingbyqIdandrId != null) {
+					Rating targetRating = ratingRepository.findByRid(targetRatingbyqIdandrId.getRid());
+					reportQuestionDetail.setTargetRatingValue(targetRating.getRatingValue());
+					reportQuestionDetail.setTargetRatingLabel(targetRating.getRatinglabel());
+				}
 
 				reportQuestionDetail.setComment(answer.getComment());
-	reportQuestionDetail.setTargetComment(answer.getTargetComment());
+				reportQuestionDetail.setTargetComment(answer.getTargetComment());
 			}
 			List<ReportFileDetails> reportFiles = new ArrayList<>();
-			Set<DBFile> qFiles = dbFileRepository.findByQIdAndUserId(question.getqId(), user.getUserId());
-			
+			Set<DBFile> qFiles = dbFileRepository.findByQIdAndUserIdAndAssessmentType(question.getqId(),
+					user.getUserId(), question.getAssessmentType());
+
 			if (qFiles != null && !qFiles.isEmpty())
 				qFiles.forEach(file -> {
-					reportFiles.add(new ReportFileDetails(file.getFileId(), file.getFileName(), ServletUriComponentsBuilder
-							.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH).path(file.getFileId() + "").toUriString()));
+					reportFiles.add(new ReportFileDetails(file.getFileId(), file.getFileName(),
+							ServletUriComponentsBuilder.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH)
+									.path(file.getFileId() + "").toUriString()));
 				});
 			reportQuestionDetail.setFiles(reportFiles);
 			reportQuestionDetails.add(reportQuestionDetail);
@@ -226,14 +223,14 @@ public class DBFileService {
 	}
 
 	@SuppressWarnings("unused")
-	public HttpEntity<byte[]> exportUserReportDetailsPDF(User user) throws Exception {
+	public HttpEntity<byte[]> exportUserReportDetailsPDF(User user, String type) throws Exception {
 		final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		final HttpHeaders headers;
 		final Document document = new Document();
-		UserReportDetails userReportDetails = getUserReportDetails(user);
+		UserReportDetails userReportDetails = getUserReportDetails(user, type);
 		try {
 			final PdfWriter writer = PdfWriter.getInstance(document, byteArrayOutputStream);
-			pdfUserReportCreation.create(document, userReportDetails);
+			pdfUserReportCreation.create(document, userReportDetails, type);
 		} catch (DocumentException ex) {
 			ex.printStackTrace();
 		}

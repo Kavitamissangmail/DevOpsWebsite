@@ -27,11 +27,12 @@ public class Category implements Serializable {
 
 	private String categoryName;
 
+	private String assessmentType;
+
 	public Category() {
 	}
 
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-
 	@org.hibernate.annotations.OrderBy(clause = "qId")
 	private Set<Question> Questions = new HashSet<Question>();
 
@@ -50,7 +51,8 @@ public class Category implements Serializable {
 	}
 
 	/**
-	 * @param questions the questions to set
+	 * @param questions
+	 *            the questions to set
 	 */
 
 	public void setQuestions(Set<Question> questions) {
@@ -72,7 +74,8 @@ public class Category implements Serializable {
 	}
 
 	/**
-	 * @param cId the cId to set
+	 * @param cId
+	 *            the cId to set
 	 */
 	public void setcId(Long cId) {
 		this.cId = cId;
@@ -80,6 +83,21 @@ public class Category implements Serializable {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	/**
+	 * @return the assessmentType
+	 */
+	public String getAssessmentType() {
+		return assessmentType;
+	}
+
+	/**
+	 * @param assessmentType
+	 *            the assessmentType to set
+	 */
+	public void setAssessmentType(String assessmentType) {
+		this.assessmentType = assessmentType;
 	}
 
 }

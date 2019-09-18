@@ -45,6 +45,12 @@ public class Question implements Serializable {
 
 	@Column(columnDefinition = "text")
 	private String questionDesc;
+	
+	private String assessmentType;
+	
+	
+	
+
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoryId", nullable = false)
@@ -153,6 +159,22 @@ public class Question implements Serializable {
 
 	public void setRatings(Set<Rating> ratings) {
 		this.ratings = ratings;
+	}
+	
+	
+
+	/**
+	 * @return the assessmentType
+	 */
+	public String getAssessmentType() {
+		return assessmentType;
+	}
+
+	/**
+	 * @param assessmentType the assessmentType to set
+	 */
+	public void setAssessmentType(String assessmentType) {
+		this.assessmentType = assessmentType;
 	}
 
 }

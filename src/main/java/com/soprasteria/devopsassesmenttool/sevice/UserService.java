@@ -54,7 +54,8 @@ public class UserService {
 		List<User> users = userRepository.findAll();
 		
 		users.forEach(user ->{
-			user.setStatus(getUserStatus(user.getUserId()));
+			user.setAgileStatus(getUserStatus(user.getUserId(),"AGILE"));
+			user.setDevopsStatus(getUserStatus(user.getUserId(),"DEVOPS"));
 		});
 		
 		return users;
@@ -74,7 +75,8 @@ public class UserService {
 			throw new ResourceNotFoundException("User with id " + userId + " not found");
 		}
 		User user = userRepository.findByUserId(userId);
-		user.setStatus(getUserStatus(user.getUserId()));
+		user.setAgileStatus(getUserStatus(user.getUserId(),"AGILE"));
+		user.setDevopsStatus(getUserStatus(user.getUserId(),"DEVOPS"));
 		return user;
 		
 	}
@@ -180,15 +182,15 @@ public class UserService {
 
 	}
 
-	public String getUserStatus(Long userId) {
+	public String getUserStatus(Long userId,String type) {
 
-		Long count = answerRepository.countByUserUserId(userId);
+		Long count = answerRepository.countByUserUserIdAndAssessmentType(userId,type);
 
 		if (count == 0) {
 			return "Not Started";
 		}
 
-		else if (count == questionRepository.count()) {
+		else if (count ==  questionRepository.countByAssessmentType(type)) {
 			return "Completed ";
 		} else {
 			return "In Progress";

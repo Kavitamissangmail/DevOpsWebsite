@@ -33,8 +33,8 @@ public class QuestionService {
 	@Autowired
 	QuestionRepository questionRepository;
 
-	public List<Question> getAllQuestions() {
-		return questionRepository.findAll();
+	public List<Question> getAllQuestions(String type) {
+			return questionRepository.getQuestionsByAssessmentType(type);
 	}
 
 	public Question getQuestionById(Long questionId) {
@@ -47,11 +47,10 @@ public class QuestionService {
 	public Question createQuestion(Long categoryId, Question question) {
 		Set<Question> questions = new HashSet<Question>();
 
-		Optional<Category> byId = categoryRepository.findByCId(categoryId);
-		if (!byId.isPresent()) {
+		Category category = categoryRepository.findByCId(categoryId);
+		if (category != null) {
 			throw new ResourceNotFoundException("category with id " + categoryId + " does not exist");
 		}
-		Category category = byId.get();
 
 		// tie Category to Question
 		question.setCategory(category);
@@ -59,7 +58,7 @@ public class QuestionService {
 		Question question1 = questionRepository.save(question);
 		// tie Question to Category
 		questions.add(question1);
-		//category1.setQuestions(questions);
+		// category1.setQuestions(questions);
 
 		return question1;
 
@@ -71,7 +70,7 @@ public class QuestionService {
 		}
 		Question question = questionRepository.findByQId(questionRequest.getqId());
 
-		if (question==null) {
+		if (question == null) {
 			throw new ResourceNotFoundException("question with id " + questionRequest.getqId() + " not found");
 		}
 
@@ -79,7 +78,7 @@ public class QuestionService {
 		question1.setQuestionlabel(questionRequest.getQuestionlabel());
 		question1.setQuestionDesc(questionRequest.getQuestionDesc());
 		question1.setqId(questionRequest.getqId());
-		
+		question1.setAssessmentType(questionRequest.getAssessmentType());
 
 		return questionRepository.save(question1);
 	}

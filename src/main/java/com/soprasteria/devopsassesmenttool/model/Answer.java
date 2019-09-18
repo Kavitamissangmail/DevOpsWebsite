@@ -45,6 +45,8 @@ public class Answer implements Serializable {
 	@Column(length = 1000)
 	private String targetComment;
 
+	private String assessmentType;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "useridanswerlink", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -180,5 +182,20 @@ public class Answer implements Serializable {
 	 */
 	public void setTargetComment(String targetComment) {
 		this.targetComment = targetComment;
+	}
+
+	/**
+	 * @return the assessmentType
+	 */
+	public String getAssessmentType() {
+		return assessmentType;
+	}
+
+	/**
+	 * @param assessmentType
+	 *            the assessmentType to set
+	 */
+	public void setAssessmentType(String assessmentType) {
+		this.assessmentType = assessmentType;
 	}
 }

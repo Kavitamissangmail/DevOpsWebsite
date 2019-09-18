@@ -43,8 +43,8 @@ public class FileController {
 	@Autowired
 	UserService userService;
 
-	public static final String DOWNLOAD_FILE_PATH="/devops/downloadFile/";
-	
+	public static final String DOWNLOAD_FILE_PATH = "/devops/downloadFile/";
+
 	@PostMapping("/user/{userId}/question/{questionId}/uploadFile")
 	public UploadFileResponse uploadFile(@PathVariable(value = "userId") Long userId,
 			@PathVariable(value = "questionId") Long questionId, @RequestParam("file") MultipartFile file) {
@@ -54,7 +54,8 @@ public class FileController {
 		if (user == null)
 			throw new ResourceNotFoundException("User with ID " + userId + " does not exist!");
 
-		DBFile dbFile = dbFileService.storeFile(file, user.getUserId(), question.getqId());
+		DBFile dbFile = dbFileService.storeFile(file, user.getUserId(), question.getqId(),
+				question.getAssessmentType());
 
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(DOWNLOAD_FILE_PATH)
 				.path(dbFile.getFileId() + "").toUriString();
@@ -88,8 +89,8 @@ public class FileController {
 	}
 
 	@GetMapping("/user/{userId}/files")
-	public Set<DBFile> getFilesByUser(@PathVariable Long userId) {
-		return dbFileService.getFileByUserId(userId);
+	public Set<DBFile> getFilesByUser(@PathVariable Long userId, @RequestParam(defaultValue = "DEVOPS") String type) {
+		return dbFileService.getFileByUserId(userId, type);
 	}
 
 	@GetMapping("/question/{questionId}/files")
@@ -98,21 +99,23 @@ public class FileController {
 	}
 
 	@GetMapping("/user/{userId}/userReportDetails")
-	public UserReportDetails getUserReportDetails(@PathVariable(value = "userId") Long userId) {
+	public UserReportDetails getUserReportDetails(@PathVariable(value = "userId") Long userId,
+			@RequestParam(defaultValue = "DEVOPS") String type) {
 
 		User user = userService.getUserByUserId(userId);
 		if (user == null)
 			throw new ResourceNotFoundException("User with ID " + userId + " does not exist!");
 
-		return dbFileService.getUserReportDetails(user);
+		return dbFileService.getUserReportDetails(user, type);
 	}
-	
+
 	@GetMapping("/user/{userId}/userReportFile")
-	public HttpEntity<byte[]>  getUserReportFile(@PathVariable Long userId) throws Exception {
+	public HttpEntity<byte[]> getUserReportFile(@PathVariable Long userId,
+			@RequestParam(defaultValue = "DEVOPS") String type) throws Exception {
 		User user = userService.getUserByUserId(userId);
 		if (user == null)
 			throw new ResourceNotFoundException("User with ID " + userId + " does not exist!");
 
-		return dbFileService.exportUserReportDetailsPDF(user);
+		return dbFileService.exportUserReportDetailsPDF(user, type);
 	}
 }

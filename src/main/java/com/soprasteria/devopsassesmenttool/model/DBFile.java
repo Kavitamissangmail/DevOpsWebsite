@@ -24,6 +24,22 @@ public class DBFile {
 	private Long userId;
 
 	private Long qId;
+	
+	private String assessmentType;
+
+	/**
+	 * @return the assessment_Type
+	 */
+	public String getAssessmentType() {
+		return assessmentType;
+	}
+
+	/**
+	 * @param assessment_Type the assessment_Type to set
+	 */
+	public void setAssessment_Type(String assessmentType) {
+		this.assessmentType = assessmentType;
+	}
 
 	@Lob
 	private byte[] data;
@@ -45,13 +61,13 @@ public class DBFile {
 		this.fileDownloadUri = fileDownloadUri;
 	}
 
-	public DBFile(String fileName, String fileType, Long userId, Long qId, byte[] data) {
+	public DBFile(String fileName, String fileType, Long userId, Long qId, byte[] data,String assessmentType) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.userId = userId;
 		this.qId = qId;
 		this.data = data;
-
+        this.assessmentType=assessmentType;
 	}
 
 	public DBFile() {

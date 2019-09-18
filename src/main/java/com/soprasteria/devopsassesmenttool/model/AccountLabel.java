@@ -75,7 +75,7 @@ public class AccountLabel implements Serializable {
 
 	private String qtype;
 
-	@Column(name = "dropdownlist")
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Embedded
 	private List<String> dropdown = new ArrayList<String>();

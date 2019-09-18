@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soprasteria.devopsassesmenttool.model.Category;
@@ -28,8 +29,8 @@ public class CategoryController {
 	QuestionService questionService;
 
 	@RequestMapping(value = "/getAllCategories", method = RequestMethod.GET)
-	public List<Category> getCategories() {
-		return categoryService.getCategories();
+	public List<Category> getCategories( @RequestParam(defaultValue="DEVOPS") String type) {
+		return categoryService.getCategories(type);
 	}
 
 	@RequestMapping(value = "/category", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -38,7 +39,7 @@ public class CategoryController {
 	}
 
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
-	public Optional<Category> getCategoryById(@PathVariable(value = "categoryId") Long categoryId) {
+	public Category getCategoryById(@PathVariable(value = "categoryId") Long categoryId) {
 		return categoryService.getCategoryById(categoryId);
 	}
 

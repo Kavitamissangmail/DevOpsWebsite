@@ -39,6 +39,7 @@ import com.soprasteria.devopsassesmenttool.repository.UserRepository;
 public class PDFUserReportCreation {
 
 	private static final String FILE_HEADER = "DevOps Assessment Report";
+	private static final String FILE_HEADER_AGILE = "AGILE Assessment Report";
 	private static final String ACCOUNT_DETAILS_HEADER = "Account Information";
 	private static final String ACCOUNT_SCOPE_HEADER = "Account Scope";
 	private static final String USER_REPORT_DETAILS_HEADER = "Rating Details";
@@ -52,12 +53,12 @@ public class PDFUserReportCreation {
 	@Autowired
 	PDFUtils pdfUtils;
 
-	public void create(final Document document, final UserReportDetails userReportDetails) throws DocumentException {
+	public void create(final Document document, final UserReportDetails userReportDetails, String type) throws DocumentException {
 		document.setPageSize(PageSize.A4);
 		document.open();
 	
 		addingImage(document);
-		createHeader(document);
+		createHeader(document,type);
 		createUserDetails(document, userReportDetails);
 		createReportDetails(document, userReportDetails);
 		document.close();
@@ -102,12 +103,22 @@ public class PDFUserReportCreation {
 	
 	
 
-	private void createHeader(Document document) throws DocumentException {
+	private void createHeader(Document document, String type) throws DocumentException {
 
-		Paragraph p = new Paragraph(FILE_HEADER, HEADER_VALUE_FONT);
-		p.setAlignment(Paragraph.ALIGN_CENTER);
-		document.add(p);
-	}
+		if(type.equalsIgnoreCase("DEVOPS"))
+		{
+			Paragraph p = new Paragraph(FILE_HEADER, HEADER_VALUE_FONT);
+			p.setAlignment(Paragraph.ALIGN_CENTER);
+			document.add(p);
+		}
+		else if(type.equalsIgnoreCase("AGILE"))
+		{
+			Paragraph p = new Paragraph(FILE_HEADER_AGILE, HEADER_VALUE_FONT);
+			p.setAlignment(Paragraph.ALIGN_CENTER);
+			document.add(p);
+		}
+		}
+	
 
 	private void createUserDetails(Document document, UserReportDetails userReportDetails) throws DocumentException {
 		User user = userRepo.findByUserId(userReportDetails.getUserId());
@@ -138,7 +149,6 @@ public class PDFUserReportCreation {
 
 						String cmdname = "get" + mdname;
 						
-						System.out.println("cmdname"+ACCOUNT_DETAILS_HEADER+cmdname);
 
 						pdfUtils.addElementToCellHeading(userAccountInfoTable, accountLabelRespository
 								.findByacccolname(labels.get(i).getAcccolname()).getAccountlabel()+":");
@@ -173,7 +183,6 @@ public class PDFUserReportCreation {
 								+ labels.get(i).getAcccolname().substring(1);
 
 						String cmdname = "get" + mdname;
-						System.out.println("cmdname  "+ACCOUNT_SCOPE_HEADER+cmdname);
 
 						pdfUtils.addElementToCellHeading(userAccountScopeTable, accountLabelRespository
 								.findByacccolname(labels.get(i).getAcccolname()).getAccountlabel()+":");
